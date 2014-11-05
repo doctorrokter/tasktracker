@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib>
+	<tlibversion>1.0</tlibversion>
+	<jspversion>2.1</jspversion>
+	<shortname>message</shortname>
+	<tag>
+    	<name>message</name>
+    	<tagclass>by.tasktracker.web.tags.MessagesTag</tagclass>
+    	<attribute>
+      		<name>message</name>
+      		<required>true</required>
+  		</attribute>
+	</tag>
+</taglib> 
