@@ -21,8 +21,7 @@ public class AbstractDaoTest extends AbstractDao {
 	public void saveTest() throws SQLException {
 		Task task = DaoHelper.createTask();
 		task.setId(save(task));
-		String query = "SELECT * FROM tasks WHERE id = " + task.getId();
-		task = (Task) executeQuery(query, Task.class);
+		task = (Task) find(Task.class, "WHERE id = ?", task.getId());
 		assertTrue(task.getTitle().equals("Test project"));
 	}
 	
@@ -30,12 +29,11 @@ public class AbstractDaoTest extends AbstractDao {
 	public void deleteAllTest() {
 		Task task = DaoHelper.createTask();
 		task.setId(save(task));
-		String query = "SELECT * FROM tasks WHERE id = " + task.getId();
-		task = (Task) executeQuery(query, Task.class);
+		task = (Task) find(Task.class, "WHERE id = ?", task.getId());
 		assertTrue(task.getTitle().equals("Test project"));
 		
 		deleteAll(Task.class);
-		task = (Task) executeQuery(query, Task.class);
+		task = (Task) find(Task.class, "WHERE id = ?", task.getId());
 		assertTrue(task == null);
 	}
 	
