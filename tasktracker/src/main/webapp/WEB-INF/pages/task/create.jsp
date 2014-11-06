@@ -20,7 +20,6 @@
 
 <form role="form" class="form-horizontal" action="${pageContext.request.contextPath}/tasks/doCreate" method="POST" accept-charset="utf-8">
 	<input type="hidden" name="parentId" value="${task.id}">
-	<input type="hidden" name="statusId" value="3">
 	<input type="hidden" name="workflowId" value="${category.workflow.id}">
 	<input type="hidden" name="categoryId" value="${category.id}">
 	
@@ -34,6 +33,16 @@
     	<label for="deadline" class="col-sm-2 control-label"><m:message message="task.page.deadline"/></label>
     	<div class="col-sm-4">
     		<input type="date" class="form-control" id="deadline" name="deadline" required="required">
+    	</div>
+  	</div>
+  	<div class="form-group">
+    	<label for="statusId" class="col-sm-2 control-label"><m:message message="task.page.status"/></label>
+    	<div class="col-sm-4">
+    		<select class="form-control" id="statusId" name="statusId">
+  				<c:forEach items="${category.workflow.statuses}" var="status">
+  					<option value="${status.id}">${status.name}</option>
+  				</c:forEach>
+			</select>
     	</div>
   	</div>
   	<div class="form-group">

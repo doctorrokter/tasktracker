@@ -14,10 +14,12 @@ import by.tasktracker.core.dao.CategoriesDao;
 import by.tasktracker.core.dao.CommentsDao;
 import by.tasktracker.core.dao.TasksDao;
 import by.tasktracker.core.dao.UsersDao;
+import by.tasktracker.core.dao.WorkflowsDao;
 import by.tasktracker.core.models.Category;
 import by.tasktracker.core.models.Comment;
 import by.tasktracker.core.models.Task;
 import by.tasktracker.core.models.User;
+import by.tasktracker.core.models.Workflow;
 
 public class TasksController extends MainController {
 	
@@ -25,12 +27,14 @@ public class TasksController extends MainController {
 	private CategoriesDao categoriesDao;
 	private UsersDao usersDao;
 	private CommentsDao commentsDao;
+	private WorkflowsDao workflowsDao;
 	
 	public TasksController() {
 		tasksDao = TasksDao.getTasksDao();
 		categoriesDao = CategoriesDao.getCategoriesDao();
 		usersDao = UsersDao.getUsersDao();
 		commentsDao = CommentsDao.getCommentsDao();
+		workflowsDao = WorkflowsDao.getWorkflowsDao();
 	}
 
 	public void index() {
@@ -50,6 +54,7 @@ public class TasksController extends MainController {
 	
 	public void create() {
 		Category category = categoriesDao.findCategoryById(Integer.parseInt(param("categoryId")));
+		category.getWorkflow().setStatuses(workflowsDao.getStatuses(category.getWorkflow()));
 		if (category.getId() == 1) {
 			Task parent = new Task();
 			parent.setId(0);
@@ -95,6 +100,9 @@ public class TasksController extends MainController {
 	
 	public void update() {
 		Task task = tasksDao.findTaskById(getId());
+		Workflow w = categoriesDao.getWorkflow(task.getCategory());
+		w.setStatuses(workflowsDao.getStatuses(w));
+		task.getCategory().setWorkflow(w);
 		param("taskUpdate", true);
 		param("task", task);
 		param("usersList", usersDao.getAllUsers());

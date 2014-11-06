@@ -20,7 +20,6 @@
 
 <form role="form" class="form-horizontal" action="${pageContext.request.contextPath}/tasks/doUpdate" method="POST" accept-charset="utf-8">
 	<input type="hidden" name="id" value="${task.id}">
-	<input type="hidden" name="statusId" value="3">
 	
 	<div class="form-group">
     	<label for="title" class="col-sm-2 control-label"><m:message message="task.page.title"/></label>
@@ -32,6 +31,16 @@
     	<label for="deadline" class="col-sm-2 control-label"><m:message message="task.page.deadline"/></label>
     	<div class="col-sm-4">
     		<input type="date" class="form-control" id="deadline" name="deadline" required="required" value="${task.deadline}">
+    	</div>
+  	</div>
+  	<div class="form-group">
+    	<label for="statusId" class="col-sm-2 control-label"><m:message message="task.page.status"/></label>
+    	<div class="col-sm-4">
+    		<select class="form-control" id="statusId" name="statusId">
+  				<c:forEach items="${task.category.workflow.statuses}" var="status">
+  					<option value="${status.id}">${status.name}</option>
+  				</c:forEach>
+			</select>
     	</div>
   	</div>
   	<div class="form-group">

@@ -4,6 +4,7 @@ import java.util.List;
 
 import by.tasktracker.core.models.Category;
 import by.tasktracker.core.models.Task;
+import by.tasktracker.core.models.Workflow;
 
 public class CategoriesDao extends AbstractDao {
 
@@ -22,6 +23,10 @@ public class CategoriesDao extends AbstractDao {
 	
 	public Category findCategoryById(int id) {
 		return (Category) find(Category.class, "WHERE id = ?", id);
+	}
+	
+	public Workflow getWorkflow(Category category) {
+		return (Workflow) find(Workflow.class, "WHERE id = ?", category.getWorkflowId());
 	}
 	
 	@SuppressWarnings("unchecked")
