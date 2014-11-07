@@ -39,10 +39,6 @@
     	<table class="table table-hover">
     		<tbody>
     			<tr>
-    				<th><m:message message="user.page.manager"/></th>
-    				<td>${user.manager.firstName} ${user.manager.lastName}</td>
-    			</tr>
-    			<tr>
     				<th><m:message message="user.page.created"/></th>
     				<td>${user.createdAt}</td>
     			</tr>

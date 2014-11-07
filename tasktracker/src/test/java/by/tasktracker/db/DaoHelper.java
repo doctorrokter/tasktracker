@@ -5,6 +5,7 @@ import java.util.Date;
 
 import by.tasktracker.core.models.Comment;
 import by.tasktracker.core.models.Task;
+import by.tasktracker.core.models.User;
 
 public class DaoHelper {
 
@@ -33,6 +34,17 @@ public class DaoHelper {
 		comment.setCreatedAt(new Timestamp(new Date().getTime()));
 		comment.setUpdatedAt(new Timestamp(new Date().getTime()));
 		return comment;
+	}
+	
+	public static User createUser() {
+		User user = new User();
+		user.setLogin("test_user");
+		user.setPassword("test123");
+		user.setFirstName("Mike");
+		user.setLastName("Oldfield");
+		user.setEmail("test@gmail.com");
+		user.setPhoneNumber("+375259000000");
+		return user;
 	}
 	
 }

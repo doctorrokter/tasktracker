@@ -64,6 +64,10 @@ public class UsersDao extends AbstractDao {
 		return (List<User>) findAll(User.class, ", users_roles ur WHERE ur.role_id = ? AND users.id = ur.user_id", role.getId());
 	}
 	
+	public void assignRole(User user, Role role) {
+		execute("INSERT INTO users_roles (user_id, role_id) VALUES (" + user.getId() + ", " + role.getId() + ")");
+	}
+	
 	public int createUser(User user) {
 		user.setCreatedAt(new Timestamp(new Date().getTime()));
 		user.setUpdatedAt(new Timestamp(new Date().getTime()));

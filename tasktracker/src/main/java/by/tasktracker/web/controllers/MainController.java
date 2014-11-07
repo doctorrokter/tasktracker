@@ -36,6 +36,10 @@ public class MainController {
 		return request.getParameter(paramName);
 	}
 	
+	protected String[] paramArray(String paramName) {
+		return request.getParameterValues(paramName);
+	}
+	
 	protected void session(String sessionParam, Object paramValue) {
 		request.getSession().setAttribute(sessionParam, paramValue);
 	}

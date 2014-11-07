@@ -49,8 +49,15 @@ public class UsersController extends MainController {
 		user.setLastName(param("lastName"));
 		user.setEmail(param("email"));
 		user.setPhoneNumber(param("phoneNumber"));
-		Object roles = param("role");
-//		user.setId(usersDao.createUser(user));
+		String[] roles = paramArray("role");
+		user.setId(usersDao.createUser(user));
+		
+		for (String roleIdStr : roles) {
+			Role role = new Role();
+			role.setId(Integer.parseInt(roleIdStr));
+			usersDao.assignRole(user, role);
+		}
+		
 		redirect("/users/info/" + user.getId());
 	}
 	

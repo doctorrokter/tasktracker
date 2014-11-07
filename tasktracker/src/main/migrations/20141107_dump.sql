@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `task_tracker` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `task_tracker`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (x86_64)
 --
--- Host: 127.0.0.1    Database: task_tracker
+-- Host: localhost    Database: task_tracker
 -- ------------------------------------------------------
--- Server version	5.6.17
+-- Server version	5.5.40-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -192,7 +192,7 @@ CREATE TABLE `users` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,7 +201,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'root','root','System','Admin',NULL,NULL,'2014-10-17 20:06:27','2014-10-17 20:06:27'),(2,'test','test','Test','User',NULL,NULL,'2014-10-18 10:07:18','2014-10-18 10:07:18'),(3,'doctorrokter','root','Mikhail','Chachkouski','doctorrokter@gmail.com','375259092555','2014-10-31 00:13:27','2014-10-31 00:13:27');
+INSERT INTO `users` VALUES (1,'root','root','System','Admin',NULL,NULL,'2014-10-17 20:06:27','2014-10-17 20:06:27'),(2,'test','test','Test','User',NULL,NULL,'2014-10-18 10:07:18','2014-10-18 10:07:18'),(3,'doctorrokter','root','Mikhail','Chachkouski','doctorrokter@gmail.com','375259092555','2014-10-31 00:13:27','2014-10-31 00:13:27'),(11,'metalhead','p@ssw0rd','Mike','Oldfield','doctorrokter@gmail.com','375259092555','2014-11-07 18:57:45','2014-11-07 18:57:45');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,10 +215,10 @@ DROP TABLE IF EXISTS `users_roles`;
 CREATE TABLE `users_roles` (
   `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`),
-  KEY `fk_role_id_idx` (`role_id`),
-  CONSTRAINT `fk_role_id` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_users_roles_1_idx` (`user_id`),
+  KEY `fk_users_roles_2_idx` (`role_id`),
+  CONSTRAINT `fk_users_roles_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_users_roles_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -228,7 +228,7 @@ CREATE TABLE `users_roles` (
 
 LOCK TABLES `users_roles` WRITE;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` VALUES (1,1),(3,1),(2,5);
+INSERT INTO `users_roles` VALUES (2,5),(3,4),(1,1),(11,2),(11,3);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-07  8:02:51
+-- Dump completed on 2014-11-07 19:00:58

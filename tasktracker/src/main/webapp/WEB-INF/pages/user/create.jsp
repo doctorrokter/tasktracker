@@ -46,12 +46,7 @@
   	<div class="form-group">
     	<label for="role" class="col-sm-2 control-label"><m:message message="user.create.page.role"/></label>
     	<div class="col-sm-4">
-    		<!-- <select class="form-control" id="role" name="role">
-  				<c:forEach items="${rolesList}" var="role">
-  					<option value="${role.id}">${role.name}</option>
-  				</c:forEach>
-			</select> -->
-			<c:forEach items="${rolesList}" var="role">
+    		<c:forEach items="${rolesList}" var="role">
 				<div class="checkbox">
 					<label><input type="checkbox" name="role" value="${role.id}">${role.name}</label>
 				</div>
