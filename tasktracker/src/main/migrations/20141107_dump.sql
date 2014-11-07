@@ -29,7 +29,9 @@ CREATE TABLE `categories` (
   `name` varchar(45) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  `workflow_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_c_workflow_id_idx` (`workflow_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -39,7 +41,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'Project','2014-10-17 08:38:10','2014-10-17 08:38:10'),(2,'Task','2014-10-17 08:38:10','2014-10-17 08:38:10'),(3,'Bug','2014-10-17 08:38:10','2014-10-17 08:38:10');
+INSERT INTO `categories` VALUES (1,'Project','2014-10-17 08:38:10','2014-10-17 08:38:10',1),(2,'Task','2014-10-17 08:38:10','2014-10-17 08:38:10',2),(3,'Bug','2014-10-17 08:38:10','2014-10-17 08:38:10',3);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,8 +63,8 @@ CREATE TABLE `comments` (
   KEY `fk_task_id_idx` (`task_id`),
   KEY `fk_user_id_idx` (`user_id`),
   CONSTRAINT `fk_task_c_id` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_c_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `fk_user_c_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,6 +73,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` VALUES (1,29,1,'First comment!','2014-11-06 20:13:50','2014-11-06 20:13:50');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +141,6 @@ CREATE TABLE `tasks` (
   `title` varchar(100) NOT NULL,
   `description` text,
   `parent_id` int(11) DEFAULT '0',
-  `root_id` int(11) DEFAULT '0',
   `status_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `deadline` datetime DEFAULT NULL,
@@ -158,7 +160,7 @@ CREATE TABLE `tasks` (
   CONSTRAINT `fk_creator_id` FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_status_id` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_workflow_id` FOREIGN KEY (`workflow_id`) REFERENCES `workflows` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=278 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,6 +169,7 @@ CREATE TABLE `tasks` (
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
+INSERT INTO `tasks` VALUES (29,'Another project','New project',0,2,1,'2014-11-20 00:00:00',1,3,1,'2014-11-02 18:46:48','2014-11-06 20:13:50');
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +188,6 @@ CREATE TABLE `users` (
   `last_name` varchar(45) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `phone_number` varchar(20) DEFAULT NULL,
-  `manager_id` int(11) DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -199,7 +201,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'root','root','System','Admin',NULL,NULL,0,'2014-10-17 20:06:27','2014-10-17 20:06:27'),(2,'test','test','Test','User',NULL,NULL,0,'2014-10-18 10:07:18','2014-10-18 10:07:18'),(3,'doctorrokter','jZoNs3kR6','Mikhail','Chachkouski','doctorrokter@gmail.com','375259092555',1,'2014-10-31 00:13:27','2014-10-31 00:13:27');
+INSERT INTO `users` VALUES (1,'root','root','System','Admin',NULL,NULL,'2014-10-17 20:06:27','2014-10-17 20:06:27'),(2,'test','test','Test','User',NULL,NULL,'2014-10-18 10:07:18','2014-10-18 10:07:18'),(3,'doctorrokter','root','Mikhail','Chachkouski','doctorrokter@gmail.com','375259092555','2014-10-31 00:13:27','2014-10-31 00:13:27');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-10-31  8:37:40
+-- Dump completed on 2014-11-07  8:02:51
