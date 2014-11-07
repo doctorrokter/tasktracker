@@ -26,7 +26,6 @@ public class UsersDaoTest extends AbstractDao {
 		User user = usersDao.findUserById(2);
 		
 		assertTrue(user.getLogin().equals("test"));
-		assertTrue(user.getManager().getLogin().equals("root"));
 	}
 	
 	@Test

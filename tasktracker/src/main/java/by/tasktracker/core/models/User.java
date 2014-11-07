@@ -5,9 +5,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import by.tasktracker.core.annotations.Column;
-import by.tasktracker.core.annotations.Join;
 import by.tasktracker.core.annotations.Table;
-import by.tasktracker.core.sql.Sql;
 
 @Table(name = "users")
 public class User extends AbstractModel implements Serializable {
@@ -38,17 +36,11 @@ public class User extends AbstractModel implements Serializable {
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	
-	@Column(name = "manager_id")
-	private int managerId;
-	
 	@Column(name = "created_at")
 	private Timestamp createdAt;
 	
 	@Column(name = "updated_at")
 	private Timestamp updatedAt;
-	
-	@Join(type = Sql.JOIN.LEFT, sourceColumn = "manager_id", table = "users", alias = "u", targetColumn = "id")
-	private User manager;
 	
 	private List<Role> roles;
 	private List<Comment> comments;
@@ -117,14 +109,6 @@ public class User extends AbstractModel implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public int getManagerId() {
-		return managerId;
-	}
-
-	public void setManagerId(int managerId) {
-		this.managerId = managerId;
-	}
-
 	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
@@ -139,14 +123,6 @@ public class User extends AbstractModel implements Serializable {
 
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-
-	public User getManager() {
-		return manager;
-	}
-
-	public void setManager(User manager) {
-		this.manager = manager;
 	}
 
 	public List<Role> getRoles() {
@@ -180,8 +156,6 @@ public class User extends AbstractModel implements Serializable {
 		result = prime * result
 				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((manager == null) ? 0 : manager.hashCode());
-		result = prime * result + managerId;
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result
@@ -232,13 +206,6 @@ public class User extends AbstractModel implements Serializable {
 			if (other.login != null)
 				return false;
 		} else if (!login.equals(other.login))
-			return false;
-		if (manager == null) {
-			if (other.manager != null)
-				return false;
-		} else if (!manager.equals(other.manager))
-			return false;
-		if (managerId != other.managerId)
 			return false;
 		if (password == null) {
 			if (other.password != null)

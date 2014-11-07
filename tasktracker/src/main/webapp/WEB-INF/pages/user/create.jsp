@@ -46,21 +46,16 @@
   	<div class="form-group">
     	<label for="role" class="col-sm-2 control-label"><m:message message="user.create.page.role"/></label>
     	<div class="col-sm-4">
-    		<select class="form-control" id="role" name="role">
+    		<!-- <select class="form-control" id="role" name="role">
   				<c:forEach items="${rolesList}" var="role">
   					<option value="${role.id}">${role.name}</option>
   				</c:forEach>
-			</select>
-    	</div>
-  	</div>
-  	<div class="form-group">
-    	<label for="manager" class="col-sm-2 control-label"><m:message message="user.create.page.manager"/></label>
-    	<div class="col-sm-4">
-    		<select class="form-control" id="manager" name="manager">
-  				<c:forEach items="${usersList}" var="user">
-  					<option value="${user.id}">${user.firstName} ${user.lastName}</option>
-  				</c:forEach>
-			</select>
+			</select> -->
+			<c:forEach items="${rolesList}" var="role">
+				<div class="checkbox">
+					<label><input type="checkbox" name="role" value="${role.id}">${role.name}</label>
+				</div>
+			</c:forEach>
     	</div>
   	</div>
   	<div class="form-group">
