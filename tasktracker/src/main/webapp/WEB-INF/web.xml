@@ -8,6 +8,7 @@
   	<display-name>TaskTrackerFilter</display-name>
   	<filter-name>TaskTrackerFilter</filter-name>
   	<filter-class>by.tasktracker.web.TaskTrackerFilter</filter-class>
+  	<async-supported>true</async-supported>
   	<init-param>
   		<param-name>exclusions</param-name>
   		<param-value>css,jsp,js,png,jpg,jpeg</param-value>

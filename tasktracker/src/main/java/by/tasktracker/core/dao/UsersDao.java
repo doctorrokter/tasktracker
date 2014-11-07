@@ -4,13 +4,11 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import by.tasktracker.core.models.Role;
 import by.tasktracker.core.models.User;
 
 public class UsersDao extends AbstractDao {
 
-	private static final Logger logger = Logger.getLogger(UsersDao.class);
 	private static UsersDao usersDao = null;
 	
 	private UsersDao() {
@@ -30,7 +28,6 @@ public class UsersDao extends AbstractDao {
 	 * @return ������ ���� User, ��������� �� id.
 	 */
 	public User findUserById(int id) {
-		logger.debug("Find user by id: " + id);
 		return (User) find(User.class, "WHERE id = ?", id);
 	}
 	
@@ -40,7 +37,6 @@ public class UsersDao extends AbstractDao {
 	 * @return ������ ���� User, ��������� �� ������.
 	 */
 	public User findUserByLogin(String login) {
-		logger.debug("Find user by login: " + login);
 		return (User) find(User.class, "WHERE login = ?", login);
 	}
 	
@@ -51,7 +47,6 @@ public class UsersDao extends AbstractDao {
 	 * @return ������ ���� User, ��������� �� ������
 	 */
 	public User findUserByCredentials(String login, String password) {
-		logger.debug("Find user by credentials: " + login);
 		return (User) find(User.class, "WHERE login = ? AND password = ?", login, password);
 	}
 	
@@ -61,19 +56,21 @@ public class UsersDao extends AbstractDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers() {
-		logger.debug("Getting all users");
 		return (List<User>) findAll(User.class);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<User> findUsersByRole(Role role) {
+		return (List<User>) findAll(User.class, ", users_roles ur WHERE ur.role_id = ? AND users.id = ur.user_id", role.getId());
 	}
 	
 	public int createUser(User user) {
 		user.setCreatedAt(new Timestamp(new Date().getTime()));
 		user.setUpdatedAt(new Timestamp(new Date().getTime()));
-		logger.debug("Creating user " + user);
 		return save(user);
 	}
 	
 	public void deleteUser(User user) {
-		logger.debug("Deleting user by id = " + user.getId());
 		delete(user);
 	}
 	

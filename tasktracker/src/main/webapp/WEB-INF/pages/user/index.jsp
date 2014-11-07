@@ -11,96 +11,50 @@
 			<a href="${pageContext.request.contextPath}/users/create" role="button" class="btn btn-default">
 				<img src="${pageContext.request.contextPath}/resources/images/user.png"/> <m:message message="user.create.user.btn"/>
 			</a>
-  			<button type="button" class="btn btn-default">
+  			<a href="${pageContext.request.contextPath}/users/delete/${user.id}" role="button" class="btn btn-default">
   				<img src="${pageContext.request.contextPath}/resources/images/delete.png"/> <m:message message="user.delete.user.btn"/>
-  			</button>
+  			</a>
   		</div>
 	</h3>	
 </div>
 
-<c:forEach items="${usersList}" var="user">
-	${user.login}<br>
-</c:forEach>
 <div class="row-fluid">
-	<section id="demonstration" role="main" class="col-md-4">
+	<section role="main" class="col-md-4">
 		<div class="tree">
 			<ul>
 				<li>
-					<span><i class="icon-folder-open"></i>Projects</span>
-					<ul>
-						<li>
-						<span class="badge badge-success"><i class="icon-minus-sign"></i> Monday, January 7: 8.00 hours</span>
-							<ul>
-								<li><a href="">
-									<span><i class="icon-time"></i>8.00</span> &ndash; Changed CSS to accomodate...</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<span class="badge badge-success"><i class="icon-minus-sign"></i> Tuesday, January 8: 8.00 hours</span>
-							<ul>
-								<li>
-									<span><i class="icon-time"></i> 6.00</span> &ndash; <a href="">Altered code...</a>
-								</li>
-								<li>
-									<span><i class="icon-time"></i> 2.00</span> &ndash; <a href="">Simplified our approach to...</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<span class="badge badge-warning"><i class="icon-minus-sign"></i> Wednesday, January 9: 6.00 hours</span>
-							<ul>
-								<li>
-									<a href=""><span><i class="icon-time"></i>3.00</span> &ndash; Fixed bug caused by...</a>
-								</li>
-								<li>
-									<a href=""><span><i class="icon-time"></i>3.00</span> &ndash; Comitting latest code to Git...</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<span class="badge badge-important"><i class="icon-minus-sign"></i> Wednesday, January 9: 4.00 hours</span>
-							<ul>
-								<li>
-									<a href=""><span><i class="icon-time"></i>2.00</span> &ndash; Create component that...</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<span><i class="icon-folder-open"></i> 2013, Week 3</span>
-					<ul>
-						<li>
-							<span class="badge badge-success"><i class="icon-minus-sign"></i> Monday, January 14: 8.00 hours</span>
-							<ul>
-								<li>
-									<span><i class="icon-time"></i> 7.75</span> &ndash; <a href="">Writing documentation...</a>
-								</li>
-								<li>
-									<span><i class="icon-time"></i> 0.25</span> &ndash; <a href="">Reverting code back to...</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<span><i class="icon-folder-open"></i> 2013, Week 3</span>
-					<ul>
-						<li>
-							<span class="badge badge-success"><i class="icon-minus-sign"></i> Monday, January 14: 8.00 hours</span>
-							<ul>
-								<li>
-									<span><i class="icon-time"></i> 7.75</span> &ndash; <a href="">Writing documentation...</a>
-								</li>
-								<li>
-									<span><i class="icon-time"></i> 0.25</span> &ndash; <a href="">Reverting code back to...</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
+					<span><i class="icon-folder-open"></i>Users</span>
+					<c:forEach items="${usersTree}" var="tree">
+						<ul>
+							<li>
+								<span><img src="${pageContext.request.contextPath}/resources/images/circle.png"/></span> <label class="label label-primary"> ${tree.key.name}</label>
+								<ul>
+									<c:forEach items="${tree.value}" var="user">
+										<li>
+											<a href="${pageContext.request.contextPath}/users/info/${user.id}"><label class="label label-success">${user.firstName} ${user.lastName}</label></a>
+										</li>
+									</c:forEach>
+								</ul>
+							</li>
+						</ul>
+					</c:forEach>
 				</li>
 			</ul>
 		</div>
 	</section>
+	<c:choose>
+		<c:when test="${userInfo}">
+			<section class="col-md-8">
+				<jsp:include page="user.jsp"/>
+			</section>
+		</c:when>
+		<c:otherwise>
+			<section class="col-md-8">
+				<div class="jumbotron">
+  					<h1>No users choosed...</h1>
+  					<h2><small>Try to choose any user from list to watch info.</small></h2>
+				</div>
+			</section>
+		</c:otherwise>
+	</c:choose>
 </div>

@@ -2,13 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="m" uri="/WEB-INF/tlds/message.tld"%>
 
-<div class="page-header">
-	<h3><m:message message="user.page.header"/> <small>${userObj.firstName} ${userObj.lastName}</small></h3>
-</div>
-
-<div class="panel panel-default">
+<div class="panel panel-info">
   <div class="panel-heading">
-    <h3 class="panel-title">User info</h3>
+    <h3 class="panel-title">
+    	<label class="label label-primary">User - ${user.firstName} ${user.lastName}</label>
+    </h3>
   </div>
   <div class="panel-body">
   	<div class="col-md-6">
@@ -16,23 +14,23 @@
     	<tbody>
     		<tr>
     			<th><m:message message="user.page.login"/></th>
-    			<td>${userObj.login}</td>
+    			<td>${user.login}</td>
     		</tr>
     		<tr>
     			<th><m:message message="user.page.firstname"/></th>
-    			<td>${userObj.firstName}</td>
+    			<td>${user.firstName}</td>
     		</tr>
     		<tr>
     			<th><m:message message="user.page.lastname"/></th>
-    			<td>${userObj.lastName}</td>
+    			<td>${user.lastName}</td>
     		</tr>
     		<tr>
     			<th><m:message message="user.page.email"/></th>
-    			<td>${userObj.email}</td>
+    			<td>${user.email}</td>
     		</tr>
     		<tr>
     			<th><m:message message="user.page.phone"/></th>
-    			<td>${userObj.phoneNumber}</td>
+    			<td>${user.phoneNumber}</td>
     		</tr>
     	</tbody>
     </table>
@@ -42,15 +40,15 @@
     		<tbody>
     			<tr>
     				<th><m:message message="user.page.manager"/></th>
-    				<td>${userObj.manager.firstName} ${userObj.manager.lastName}</td>
+    				<td>${user.manager.firstName} ${user.manager.lastName}</td>
     			</tr>
     			<tr>
     				<th><m:message message="user.page.created"/></th>
-    				<td>${userObj.createdAt}</td>
+    				<td>${user.createdAt}</td>
     			</tr>
     			<tr>
     				<th><m:message message="user.page.updated"/></th>
-    				<td>${userObj.updatedAt}</td>
+    				<td>${user.updatedAt}</td>
     			</tr>
     		</tbody>
     	</table>

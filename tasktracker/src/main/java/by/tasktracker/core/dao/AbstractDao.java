@@ -298,7 +298,9 @@ public class AbstractDao {
 	
 	private void close(Statement statement, ResultSet resultSet) {
 		try {
-			resultSet.close();
+			if (resultSet != null) {
+				resultSet.close();
+			}
 			statement.close();
 		} catch (SQLException e) {
 			logger.error(e.getMessage());

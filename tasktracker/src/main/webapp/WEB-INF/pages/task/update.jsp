@@ -38,7 +38,9 @@
     	<div class="col-sm-4">
     		<select class="form-control" id="statusId" name="statusId">
   				<c:forEach items="${task.category.workflow.statuses}" var="status">
-  					<option value="${status.id}">${status.name}</option>
+  					<option value="${status.id}" <c:if test="${task.statusId == status.id}">selected="selected"</c:if>>
+  						${status.name}
+  					</option>
   				</c:forEach>
 			</select>
     	</div>
@@ -54,7 +56,9 @@
     	<div class="col-sm-4">
     		<select class="form-control" id="assigneeId" name="assigneeId">
   				<c:forEach items="${usersList}" var="user">
-  					<option value="${user.id}">${user.firstName} ${user.lastName}</option>
+  					<option value="${user.id}" <c:if test="${task.assigneeId == user.id}">selected="selected"</c:if>>
+  						${user.firstName} ${user.lastName}
+  					</option>
   				</c:forEach>
 			</select>
     	</div>

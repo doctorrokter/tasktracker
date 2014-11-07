@@ -3,7 +3,6 @@ package by.tasktracker.core.dao;
 import static org.junit.Assert.*;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import by.tasktracker.core.models.Comment;
@@ -112,7 +111,6 @@ public class TasksDaoTest extends AbstractDao {
 	 * �������� �� ������� ���� ������������, ����������� � ������� ������.
 	 */
 	@Test
-	@Ignore
 	public void getTaskCommentsTest() {
 		Task task1 = DaoHelper.createTask();
 		task1.setId(save(task1));

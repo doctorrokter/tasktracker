@@ -26,7 +26,8 @@ public class TaskTrackerFilter implements Filter {
     	HttpServletRequest req = (HttpServletRequest) request;
     	HttpServletResponse resp = (HttpServletResponse) response;
 //    	req.setCharacterEncoding(encoding);
-    	
+    	req.setCharacterEncoding(encoding);
+    	    	
     	String url = req.getRequestURI().replaceFirst(req.getContextPath(), "");
     	System.out.println(url);
     	

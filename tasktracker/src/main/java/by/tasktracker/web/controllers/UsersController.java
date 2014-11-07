@@ -1,7 +1,12 @@
 package by.tasktracker.web.controllers;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import by.tasktracker.core.dao.RolesDao;
 import by.tasktracker.core.dao.UsersDao;
+import by.tasktracker.core.models.Role;
 import by.tasktracker.core.models.User;
 
 public class UsersController extends MainController {
@@ -16,14 +21,16 @@ public class UsersController extends MainController {
 	
 	public void index() {
 		param("usersView", true);
-		param("usersList", usersDao.getAllUsers());
+		param("usersTree", getUsersTree());
 		forward("/WEB-INF/pages/layout/_default_layout.jsp");
 	}
 	
 	public void info() {
 		User user = usersDao.findUserById(getId());
 		param("userInfo", true);
-		param("userObj", user);
+		param("user", user);
+		param("usersTree", getUsersTree());
+		param("usersView", true);
 		forward("/WEB-INF/pages/layout/_default_layout.jsp");
 	}
 	
@@ -47,4 +54,21 @@ public class UsersController extends MainController {
 		redirect("/users/info/" + user.getId());
 	}
 	
+	public void delete() {
+		User user = new User();
+		user.setId(getId());
+		usersDao.deleteUser(user);
+		param("usersTree", getUsersTree());
+		param("usersView", true);
+		redirect("/users");
+	}
+	
+	private Map<Role, List<User>> getUsersTree() {
+		Map<Role, List<User>> usersTree = new HashMap<>();
+		List<Role> roles = rolesDao.getAllRoles();
+		for (Role r : roles) {
+			usersTree.put(r, usersDao.findUsersByRole(r));
+		}
+		return usersTree;
+	}
 }

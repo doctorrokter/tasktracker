@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Test;
 
+import by.tasktracker.core.models.Role;
 import by.tasktracker.core.models.User;
 
 public class UsersDaoTest extends AbstractDao {
@@ -43,6 +44,13 @@ public class UsersDaoTest extends AbstractDao {
 	@Test
 	public void getAllUsersTest() {
 		assertTrue(usersDao.getAllUsers().size() > 0);
+	}
+	
+	@Test
+	public void findUsersByRoleTest() {
+		Role role = new Role();
+		role.setId(1);
+		assertTrue(usersDao.findUsersByRole(role).size() > 0);
 	}
 
 }

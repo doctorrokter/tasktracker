@@ -34,7 +34,7 @@
 	<c:if test="${not empty error}">
 		<div class="alert alert-danger" role="alert">${error}</div>
 	</c:if>
-	<section id="demonstration" role="main" class="col-md-4">
+	<section role="main" class="col-md-4">
 		<div class="tree">
 			<ul>
 				<li>

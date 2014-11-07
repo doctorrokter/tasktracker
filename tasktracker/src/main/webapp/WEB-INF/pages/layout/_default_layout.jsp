@@ -85,9 +85,6 @@
           <c:if test="${userCreate}">
           	<jsp:include page="../user/create.jsp"/>	
           </c:if>
-          <c:if test="${userInfo}">
-          	<jsp:include page="../user/user.jsp"/>	
-          </c:if>     
         </div>
         
       </div>
