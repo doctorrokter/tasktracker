@@ -4,9 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 public class MessagesBundle {
 
-private static Properties props;
+	private static final Logger logger = Logger.getLogger(MessagesBundle.class);
+	private static Properties props;
 	
 	static {
 		props = new Properties();
@@ -26,14 +29,14 @@ private static Properties props;
 	}
 	
 	public static void setLanguage(Lang lang) {
-		System.out.println("Loading messages file: messages_" + lang + ".properties");
+		logger.info("Loading messages file: messages_" + lang + ".properties");
 		try {
 			props.load(MessagesBundle.class.getClassLoader().getResourceAsStream("messages_" + lang + ".properties"));
-			System.out.println("Messages loaded!");
+			logger.info("Messages loaded!");
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 	}
 	

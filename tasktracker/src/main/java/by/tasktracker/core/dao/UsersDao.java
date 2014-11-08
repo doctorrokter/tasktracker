@@ -68,10 +68,19 @@ public class UsersDao extends AbstractDao {
 		execute("INSERT INTO users_roles (user_id, role_id) VALUES (" + user.getId() + ", " + role.getId() + ")");
 	}
 	
+	public void removeRoles(User user) {
+		execute("DELETE FROM users_roles WHERE user_id = " + user.getId() + ")");
+	}
+	
 	public int createUser(User user) {
 		user.setCreatedAt(new Timestamp(new Date().getTime()));
 		user.setUpdatedAt(new Timestamp(new Date().getTime()));
 		return save(user);
+	}
+	
+	public void updateUser(User user) {
+		user.setUpdatedAt(new Timestamp(new Date().getTime()));
+		update(user);
 	}
 	
 	public void deleteUser(User user) {

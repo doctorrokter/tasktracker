@@ -61,6 +61,34 @@ public class UsersController extends MainController {
 		redirect("/users/info/" + user.getId());
 	}
 	
+	public void update() {
+		User user = usersDao.findUserById(getId());
+		user.setRoles(rolesDao.getUserRoles(user));
+		param("userUpdate", true);
+		param("rolesList", rolesDao.getAllRoles());
+		param("user", user);
+		forward("/WEB-INF/pages/layout/_default_layout.jsp");
+	}
+	
+	public void doUpdate() {
+		User user = usersDao.findUserById(Integer.parseInt(param("id")));
+		user.setLogin(param("login"));
+		user.setPassword(param("password"));
+		user.setFirstName(param("firstName"));
+		user.setLastName(param("lastName"));
+		user.setEmail(param("email"));
+		user.setPhoneNumber(param("phoneNumber"));
+		String[] roles = paramArray("role");
+		usersDao.removeRoles(user);
+		for (String roleIdStr : roles) {
+			Role role = new Role();
+			role.setId(Integer.parseInt(roleIdStr));
+			usersDao.assignRole(user, role);
+		}
+		usersDao.updateUser(user);
+		redirect("/users/info/" + user.getId());
+	}
+	
 	public void delete() {
 		User user = new User();
 		user.setId(getId());

@@ -4,20 +4,23 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 public class AppConfig {
 
+	private static final Logger logger = Logger.getLogger(AppConfig.class);
 	private static Properties props;
 	
 	static {
 		props = new Properties();
-		System.out.println("Loading app config...");
+		logger.info("Loading app config...");
 		try {
 			props.load(AppConfig.class.getClassLoader().getResourceAsStream("app_config.properties"));
-			System.out.println("App config loaded!");
+			logger.info("App config loaded!");
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 	}
 	

@@ -111,7 +111,8 @@ public class MainController {
 			if (url.endsWith("/auth")) {
 				new LoginController().auth();
 			} else {
-				redirect("/");
+//				redirect("/");
+				processUrl(url);
 			}
 		} else if (url.startsWith("/messages")) {
 			processUrl(url);

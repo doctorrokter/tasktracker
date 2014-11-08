@@ -11,6 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import by.tasktracker.web.controllers.MainController;
 
 /**
@@ -18,6 +20,7 @@ import by.tasktracker.web.controllers.MainController;
  */
 public class TaskTrackerFilter implements Filter {
 
+	private static final Logger logger = Logger.getLogger(TaskTrackerFilter.class);
 	private String[] exc;
 	private String encoding;
 	
@@ -25,11 +28,10 @@ public class TaskTrackerFilter implements Filter {
 
     	HttpServletRequest req = (HttpServletRequest) request;
     	HttpServletResponse resp = (HttpServletResponse) response;
-//    	req.setCharacterEncoding(encoding);
     	req.setCharacterEncoding(encoding);
     	    	
     	String url = req.getRequestURI().replaceFirst(req.getContextPath(), "");
-    	System.out.println(url);
+    	logger.debug(url);
     	
     	boolean resourcesRequest = false;
     	for (String exclusion : exc) {

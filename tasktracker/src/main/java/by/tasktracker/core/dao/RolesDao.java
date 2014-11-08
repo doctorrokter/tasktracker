@@ -22,7 +22,7 @@ public class RolesDao extends AbstractDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Role> getAllRoles() {
-		return (List<Role>) findAll(Role.class);
+		return (List<Role>) findAll(Role.class, "ORDER BY id");
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -38,7 +38,7 @@
           		</ul>
         	</li>
             <li>
-            	<a href="${pageContext.request.contextPath}/users/info/${logged_user.id}" class="navbar-link"><span class="label label-primary">${logged_user.firstName} ${logged_user.lastName}</span></a>
+            	<a href="${pageContext.request.contextPath}/login/logout" class="navbar-link"><span class="label label-primary">${logged_user.firstName} ${logged_user.lastName}</span></a>
             </li>
           </ul>
           <form class="navbar-form navbar-right">
@@ -62,7 +62,7 @@
             </li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li class='<c:if test="${usersView || userInfo || userCreate}">active</c:if>'>
+            <li class='<c:if test="${usersView || userInfo || userCreate || userUpdate}">active</c:if>'>
             	<a href="${pageContext.request.contextPath}/users"><m:message message="def.side.menu.users"/></a>
             </li>
           </ul>
@@ -84,6 +84,9 @@
           </c:if>
           <c:if test="${userCreate}">
           	<jsp:include page="../user/create.jsp"/>	
+          </c:if>
+          <c:if test="${userUpdate}">
+          	<jsp:include page="../user/update.jsp"/>	
           </c:if>
         </div>
         

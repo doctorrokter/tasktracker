@@ -22,4 +22,9 @@ public class LoginController extends MainController {
 		}
 	}
 	
+	public void logout() {
+		session("logged_user", null);
+		redirect("/");
+	}
+	
 }
