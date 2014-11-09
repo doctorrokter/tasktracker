@@ -13,13 +13,18 @@ import org.apache.log4j.Logger;
 
 import by.tasktracker.config.AppConfig;
 
-public class Mailer {
+public class Mailer extends Thread{
 
 	private static final Logger logger = Logger.getLogger(Mailer.class);
-	private static Mailer mailer;
 	private Session session;
+	private String receiver;
+	private String subject;
+	private String messageText;
 	
-	private Mailer() {
+	public Mailer(String receiver, String subject, String messageText) {
+		this.receiver = receiver;
+		this.subject = subject;
+		this.messageText = messageText;
 		Authenticator auth = new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(AppConfig.p("mail.smtp.user"), AppConfig.p("mail.smtp.password"));
@@ -28,14 +33,8 @@ public class Mailer {
 		session = Session.getDefaultInstance(AppConfig.getProperties(), auth);
 	}
 	
-	public static Mailer getMailer() {
-		if (mailer == null) {
-			mailer = new Mailer();
-		}
-		return mailer;
-	}
-	
-	public void send(String receiver, String subject, String messageText) {
+	@Override
+	public void run() {
 		try {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(AppConfig.p("mail.smtp.user")));

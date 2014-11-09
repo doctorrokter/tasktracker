@@ -29,21 +29,19 @@ public class TasksController extends MainController {
 	private UsersDao usersDao;
 	private CommentsDao commentsDao;
 	private WorkflowsDao workflowsDao;
-	private Mailer mailer;
-	
+		
 	public TasksController() {
 		tasksDao = TasksDao.getTasksDao();
 		categoriesDao = CategoriesDao.getCategoriesDao();
 		usersDao = UsersDao.getUsersDao();
 		commentsDao = CommentsDao.getCommentsDao();
 		workflowsDao = WorkflowsDao.getWorkflowsDao();
-		mailer = Mailer.getMailer();
 	}
 
 	public void index() {
 		param("tasksView", true);
 		param("tasksTree", getTasksTree(tasksDao.getAllTasks()));
-		forward("/WEB-INF/pages/layout/_default_layout.jsp");
+		forward("layout/" + getDefaultLayout());
 	}
 	public void info() {
 		Task task = tasksDao.findTaskById(getId());
@@ -52,7 +50,7 @@ public class TasksController extends MainController {
 		param("taskInfo", true);
 		param("task", task);
 		param("tasksTree", getTasksTree(tasksDao.getAllTasks()));
-		forward("/WEB-INF/pages/layout/_default_layout.jsp");
+		forward("layout/" + getDefaultLayout());
 	}
 	
 	public void create() {
@@ -65,7 +63,7 @@ public class TasksController extends MainController {
 			param("taskCreate", true);
 			param("task", parent);
 			param("usersList", usersDao.getAllUsers());
-			forward("/WEB-INF/pages/layout/_default_layout.jsp");
+			forward("layout/" + getDefaultLayout());
 		} else if (category.getId() == 2 || category.getId() == 3) {
 			Task parent = tasksDao.findTaskById(Integer.parseInt(param("parentId")));
 			if (parent.getCategory().getId() != 1) {
@@ -74,13 +72,13 @@ public class TasksController extends MainController {
 				param("tasksTree", getTasksTree(tasksDao.getAllTasks()));
 				param("task", parent);
 				param("error", ((MessagesBundle) session("messages")).message("error.create.task.wrong.parent"));
-				forward("/WEB-INF/pages/layout/_default_layout.jsp");
+				forward("layout/" + getDefaultLayout());
 			} else {
 				param("task", parent);
 				param("category", category);
 				param("taskCreate", true);
 				param("usersList", usersDao.getAllUsers());
-				forward("/WEB-INF/pages/layout/_default_layout.jsp");
+				forward("layout/" + getDefaultLayout());
 			}
 		}
 	}
@@ -99,8 +97,8 @@ public class TasksController extends MainController {
 		task.setDeadline(new Timestamp(getDateFromString(param("deadline")).getTime()));
 		task.setId(tasksDao.createTask(task));
 		
-//		mailer.send(user.getEmail(), "Created [" + task.getId() + "] - " + task.getTitle(), task.getDescription());
-//		mailer.send(usersDao.findUserById(task.getAssigneeId()).getEmail(), "Created [" + task.getId() + "] - " + task.getTitle(), task.getDescription());
+		new Thread(new Mailer(user.getEmail(), "Updated [" + task.getId() + "] - " + task.getTitle(), task.getDescription())).start();
+		new Thread(new Mailer(usersDao.findUserById(task.getAssigneeId()).getEmail(), "Updated [" + task.getId() + "] - " + task.getTitle(), task.getDescription())).start();
 		
 		redirect("/tasks/info/" + task.getId());
 	}
@@ -113,7 +111,7 @@ public class TasksController extends MainController {
 		param("taskUpdate", true);
 		param("task", task);
 		param("usersList", usersDao.getAllUsers());
-		forward("/WEB-INF/pages/layout/_default_layout.jsp");
+		forward("layout/" + getDefaultLayout());
 	}
 	
 	public void doUpdate() {
@@ -133,8 +131,8 @@ public class TasksController extends MainController {
 		comment.setUserId(user.getId());
 		commentsDao.createComment(comment);
 		
-//		mailer.send(user.getEmail(), "Updated [" + task.getId() + "] - " + task.getTitle(), task.getDescription());
-//		mailer.send(usersDao.findUserById(task.getAssigneeId()).getEmail(), "Updated [" + task.getId() + "] - " + task.getTitle(), task.getDescription());
+		new Thread(new Mailer(user.getEmail(), "Updated [" + task.getId() + "] - " + task.getTitle(), task.getDescription())).start();
+		new Thread(new Mailer(usersDao.findUserById(task.getAssigneeId()).getEmail(), "Updated [" + task.getId() + "] - " + task.getTitle(), task.getDescription())).start();
 		
 		redirect("/tasks/info/" + task.getId());
 	}
@@ -145,7 +143,7 @@ public class TasksController extends MainController {
 		tasksDao.deleteTask(task);
 		param("tasksTree", getTasksTree(tasksDao.getAllTasks()));
 		param("tasksView", true);
-		forward("/WEB-INF/pages/layout/_default_layout.jsp");
+		forward("layout/" + getDefaultLayout());
 	}
 	
 	private Map<Task, List<Task>> getTasksTree(List<Task> tasks) {

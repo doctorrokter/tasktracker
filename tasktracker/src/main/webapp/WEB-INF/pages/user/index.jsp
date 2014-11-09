@@ -13,12 +13,14 @@
 					<a href="${pageContext.request.contextPath}/users/create" role="button" class="btn btn-default">
 						<img src="${pageContext.request.contextPath}/resources/images/user.png"/> <m:message message="user.create.user.btn"/>
 					</a>
-					<a href="${pageContext.request.contextPath}/users/update/${user.id}" type="button" role="button" class="btn btn-default">
-  						<img src="${pageContext.request.contextPath}/resources/images/update.png"/> <m:message message="user.update.user.btn"/>
-  					</a>
-  					<a href="${pageContext.request.contextPath}/users/delete/${user.id}" role="button" class="btn btn-default">
-  						<img src="${pageContext.request.contextPath}/resources/images/delete.png"/> <m:message message="user.delete.user.btn"/>
-  					</a>
+					<c:if test="${userInfo}">
+						<a href="${pageContext.request.contextPath}/users/update/${user.id}" type="button" role="button" class="btn btn-default">
+  							<img src="${pageContext.request.contextPath}/resources/images/update.png"/> <m:message message="user.update.user.btn"/>
+  						</a>
+  						<a href="${pageContext.request.contextPath}/users/delete/${user.id}" role="button" class="btn btn-default">
+  							<img src="${pageContext.request.contextPath}/resources/images/delete.png"/> <m:message message="user.delete.user.btn"/>
+  						</a>
+  					</c:if>
   				</c:if>
   			</c:forEach>
   		</div>

@@ -22,7 +22,7 @@ public class UsersController extends MainController {
 	public void index() {
 		param("usersView", true);
 		param("usersTree", getUsersTree());
-		forward("/WEB-INF/pages/layout/_default_layout.jsp");
+		forward("layout/" + getDefaultLayout());
 	}
 	
 	public void info() {
@@ -31,14 +31,14 @@ public class UsersController extends MainController {
 		param("user", user);
 		param("usersTree", getUsersTree());
 		param("usersView", true);
-		forward("/WEB-INF/pages/layout/_default_layout.jsp");
+		forward("layout/" + getDefaultLayout());
 	}
 	
 	public void create() {
 		param("userCreate", true);
 		param("rolesList", rolesDao.getAllRoles());
 		param("usersList", usersDao.getAllUsers());
-		forward("/WEB-INF/pages/layout/_default_layout.jsp");
+		forward("layout/" + getDefaultLayout());
 	}
 	
 	public void doCreate() {
@@ -67,7 +67,7 @@ public class UsersController extends MainController {
 		param("userUpdate", true);
 		param("rolesList", rolesDao.getAllRoles());
 		param("user", user);
-		forward("/WEB-INF/pages/layout/_default_layout.jsp");
+		forward("layout/" + getDefaultLayout());
 	}
 	
 	public void doUpdate() {

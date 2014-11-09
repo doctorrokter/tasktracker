@@ -17,6 +17,7 @@ public class MainController {
 	private static HttpServletResponse response;
 	private static FilterChain chain;
 	private static int id;
+	private static String defaultLayout;
 		
 	public MainController() {
 		
@@ -26,6 +27,7 @@ public class MainController {
 		MainController.request = request;
 		MainController.response = response;
 		MainController.chain = chain;
+		defaultLayout = "_default_layout.jsp";
 	}
 
 	protected void param(String paramName, Object paramValue) {
@@ -50,7 +52,7 @@ public class MainController {
 	
 	protected void forward(String forwardTo) {
 		try {
-			request.getRequestDispatcher(forwardTo).forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/pages/" + forwardTo).forward(request, response);
 		} catch (ServletException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -100,6 +102,14 @@ public class MainController {
 		MainController.id = id;
 	}
 	
+	public String getDefaultLayout() {
+		return defaultLayout;
+	}
+
+	public void setDefaultLayout(String defaultLayout) {
+		this.defaultLayout = defaultLayout;
+	}
+
 	public String getResourse() {
 		String url = request.getRequestURI().replaceFirst(request.getContextPath(), "");
 		
@@ -111,7 +121,6 @@ public class MainController {
 			if (url.endsWith("/auth")) {
 				new LoginController().auth();
 			} else {
-//				redirect("/");
 				processUrl(url);
 			}
 		} else if (url.startsWith("/messages")) {
