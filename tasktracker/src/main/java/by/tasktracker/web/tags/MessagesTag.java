@@ -2,6 +2,7 @@ package by.tasktracker.web.tags;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -20,7 +21,9 @@ public class MessagesTag extends TagSupport {
 	public int doStartTag() throws JspException {
 		try {
 			JspWriter out = pageContext.getOut();
-			out.println(MessagesBundle.message(message));
+			HttpServletRequest req = (HttpServletRequest) pageContext.getRequest();
+			MessagesBundle mb = (MessagesBundle) req.getSession().getAttribute("messages");
+			out.println(mb.message(message));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

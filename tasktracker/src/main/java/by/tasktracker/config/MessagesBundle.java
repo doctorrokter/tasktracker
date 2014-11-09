@@ -9,26 +9,22 @@ import org.apache.log4j.Logger;
 public class MessagesBundle {
 
 	private static final Logger logger = Logger.getLogger(MessagesBundle.class);
-	private static Properties props;
+	private Properties props;
 	
-	static {
+	public MessagesBundle() {
 		props = new Properties();
 		setLanguage(Lang.EN);
-	}
-	
-	private MessagesBundle() {
-		
 	}
 	
 	public enum Lang {
 		EN, RU;		
 	}
 	
-	public static String message(String name) {
+	public String message(String name) {
 		return props.getProperty(name);
 	}
 	
-	public static void setLanguage(Lang lang) {
+	public void setLanguage(Lang lang) {
 		logger.info("Loading messages file: messages_" + lang + ".properties");
 		try {
 			props.load(MessagesBundle.class.getClassLoader().getResourceAsStream("messages_" + lang + ".properties"));

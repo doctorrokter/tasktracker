@@ -7,13 +7,13 @@ public class MessagesController extends MainController {
 
 	public void change() {
 		String lang = param("lang");
+		MessagesBundle mb = new MessagesBundle();
 		if (lang.equals("RU")) {
-			MessagesBundle.setLanguage(Lang.RU);
-			session("curr_lang", "ru");
+			mb.setLanguage(Lang.RU);
 		} else if (lang.equals("EN")) {
-			MessagesBundle.setLanguage(Lang.EN);
-			session("curr_lang", "en");
+			mb.setLanguage(Lang.EN);
 		}
+		session("messages", mb);
 		redirect("/");
 	}
 	

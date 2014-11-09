@@ -20,6 +20,7 @@ import by.tasktracker.core.models.Comment;
 import by.tasktracker.core.models.Task;
 import by.tasktracker.core.models.User;
 import by.tasktracker.core.models.Workflow;
+import by.tasktracker.core.util.Mailer;
 
 public class TasksController extends MainController {
 	
@@ -28,6 +29,7 @@ public class TasksController extends MainController {
 	private UsersDao usersDao;
 	private CommentsDao commentsDao;
 	private WorkflowsDao workflowsDao;
+	private Mailer mailer;
 	
 	public TasksController() {
 		tasksDao = TasksDao.getTasksDao();
@@ -35,6 +37,7 @@ public class TasksController extends MainController {
 		usersDao = UsersDao.getUsersDao();
 		commentsDao = CommentsDao.getCommentsDao();
 		workflowsDao = WorkflowsDao.getWorkflowsDao();
+		mailer = Mailer.getMailer();
 	}
 
 	public void index() {
@@ -70,7 +73,7 @@ public class TasksController extends MainController {
 				param("taskInfo", true);
 				param("tasksTree", getTasksTree(tasksDao.getAllTasks()));
 				param("task", parent);
-				param("error", MessagesBundle.message("error.create.task.wrong.parent"));
+				param("error", ((MessagesBundle) session("messages")).message("error.create.task.wrong.parent"));
 				forward("/WEB-INF/pages/layout/_default_layout.jsp");
 			} else {
 				param("task", parent);
@@ -95,6 +98,10 @@ public class TasksController extends MainController {
 		task.setWorkflowId(Integer.parseInt(param("workflowId")));
 		task.setDeadline(new Timestamp(getDateFromString(param("deadline")).getTime()));
 		task.setId(tasksDao.createTask(task));
+		
+//		mailer.send(user.getEmail(), "Created [" + task.getId() + "] - " + task.getTitle(), task.getDescription());
+//		mailer.send(usersDao.findUserById(task.getAssigneeId()).getEmail(), "Created [" + task.getId() + "] - " + task.getTitle(), task.getDescription());
+		
 		redirect("/tasks/info/" + task.getId());
 	}
 	
@@ -117,6 +124,7 @@ public class TasksController extends MainController {
 		task.setStatusId(Integer.parseInt(param("statusId")));
 		task.setDeadline(new Timestamp(getDateFromString(param("deadline")).getTime()));
 		task.setAssigneeId(Integer.parseInt(param("assigneeId")));
+		task.setProgress(Integer.parseInt(param("progress")));
 		tasksDao.updateTask(task);
 		
 		Comment comment = new Comment();
@@ -124,6 +132,9 @@ public class TasksController extends MainController {
 		comment.setTaskId(task.getId());
 		comment.setUserId(user.getId());
 		commentsDao.createComment(comment);
+		
+//		mailer.send(user.getEmail(), "Updated [" + task.getId() + "] - " + task.getTitle(), task.getDescription());
+//		mailer.send(usersDao.findUserById(task.getAssigneeId()).getEmail(), "Updated [" + task.getId() + "] - " + task.getTitle(), task.getDescription());
 		
 		redirect("/tasks/info/" + task.getId());
 	}

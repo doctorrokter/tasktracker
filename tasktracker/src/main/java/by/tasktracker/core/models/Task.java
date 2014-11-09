@@ -47,6 +47,9 @@ public class Task extends AbstractModel implements Serializable {
 	@Column(name = "workflow_id")
 	private int workflowId;
 	
+	@Column(name = "progress")
+	private int progress;
+	
 	@Column(name = "created_at")
 	private Timestamp createdAt;
 	
@@ -158,6 +161,14 @@ public class Task extends AbstractModel implements Serializable {
 		this.workflowId = workflowId;
 	}
 
+	public int getProgress() {
+		return progress;
+	}
+
+	public void setProgress(int progress) {
+		this.progress = progress;
+	}
+
 	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
@@ -229,23 +240,17 @@ public class Task extends AbstractModel implements Serializable {
 		result = prime * result
 				+ ((assignee == null) ? 0 : assignee.hashCode());
 		result = prime * result + assigneeId;
-		result = prime * result
-				+ ((category == null) ? 0 : category.hashCode());
 		result = prime * result + categoryId;
 		result = prime * result
-				+ ((comments == null) ? 0 : comments.hashCode());
-		result = prime * result
 				+ ((createdAt == null) ? 0 : createdAt.hashCode());
-		result = prime * result + ((creator == null) ? 0 : creator.hashCode());
 		result = prime * result + creatorId;
 		result = prime * result
 				+ ((deadline == null) ? 0 : deadline.hashCode());
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
 		result = prime * result + parentId;
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + progress;
 		result = prime * result + statusId;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result
@@ -270,27 +275,12 @@ public class Task extends AbstractModel implements Serializable {
 			return false;
 		if (assigneeId != other.assigneeId)
 			return false;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
 		if (categoryId != other.categoryId)
-			return false;
-		if (comments == null) {
-			if (other.comments != null)
-				return false;
-		} else if (!comments.equals(other.comments))
 			return false;
 		if (createdAt == null) {
 			if (other.createdAt != null)
 				return false;
 		} else if (!createdAt.equals(other.createdAt))
-			return false;
-		if (creator == null) {
-			if (other.creator != null)
-				return false;
-		} else if (!creator.equals(other.creator))
 			return false;
 		if (creatorId != other.creatorId)
 			return false;
@@ -306,17 +296,9 @@ public class Task extends AbstractModel implements Serializable {
 			return false;
 		if (id != other.id)
 			return false;
-		if (parent == null) {
-			if (other.parent != null)
-				return false;
-		} else if (!parent.equals(other.parent))
-			return false;
 		if (parentId != other.parentId)
 			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
+		if (progress != other.progress)
 			return false;
 		if (statusId != other.statusId)
 			return false;

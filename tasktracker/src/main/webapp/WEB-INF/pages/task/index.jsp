@@ -6,24 +6,31 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-tree.js"></script>
 
 <div class="page-header">
-	<h3>Tasks
+	<h3><m:message message="task.index.header"/>
 		<div class="pull-right">
-			<a href="${pageContext.request.contextPath}/tasks/create?categoryId=1" type="button" role="button" class="btn btn-default">
-				<img src="${pageContext.request.contextPath}/resources/images/project.png"/> <m:message message="task.create.project.btn"/>
-			</a>
-  			<a href="${pageContext.request.contextPath}/tasks/create?categoryId=2&parentId=${task.id}" type="button" role="button" class="btn btn-default">
-  				<img src="${pageContext.request.contextPath}/resources/images/task.png"/> <m:message message="task.create.task.btn"/>
-  			</a>
-  			<a href="${pageContext.request.contextPath}/tasks/create?categoryId=3&parentId=${task.id}" type="button" role="button" class="btn btn-default">
-  				<img src="${pageContext.request.contextPath}/resources/images/bug.png"/> <m:message message="task.create.bug.btn"/>
-  			</a>
-  			
-  			<c:if test="${taskInfo}">
+			<c:if test="${taskInfo}">
+  				<c:forEach items="${logged_user.roles}" var="role">
+  					<c:if test="${role.name eq 'admin' || role.name eq 'project manager'}">
+  						<a href="${pageContext.request.contextPath}/tasks/create?categoryId=1" type="button" role="button" class="btn btn-default">
+							<img src="${pageContext.request.contextPath}/resources/images/project.png"/> <m:message message="task.create.project.btn"/>
+						</a> 
+  						<a href="${pageContext.request.contextPath}/tasks/create?categoryId=2&parentId=${task.id}" type="button" role="button" class="btn btn-default">
+  							<img src="${pageContext.request.contextPath}/resources/images/task.png"/> <m:message message="task.create.task.btn"/>
+  						</a>
+  					</c:if>
+  					<c:if test="${role.name eq 'admin' || role.name eq 'tester'}">
+  						<a href="${pageContext.request.contextPath}/tasks/create?categoryId=3&parentId=${task.id}" type="button" role="button" class="btn btn-default">
+  							<img src="${pageContext.request.contextPath}/resources/images/bug.png"/> <m:message message="task.create.bug.btn"/>
+  						</a>
+  					</c:if>
+  					<c:if test="${role.name eq 'admin'}">
+  						<a href="${pageContext.request.contextPath}/tasks/delete/${task.id}" type="button" role="button" class="btn btn-default">
+  							<img src="${pageContext.request.contextPath}/resources/images/delete.png"/> <m:message message="task.delete.def.btn"/>
+  						</a>
+  					</c:if>
+  				</c:forEach>
   				<a href="${pageContext.request.contextPath}/tasks/update/${task.id}" type="button" role="button" class="btn btn-default">
   					<img src="${pageContext.request.contextPath}/resources/images/update.png"/> <m:message message="task.update.def.btn"/>
-  				</a>
-  				<a href="${pageContext.request.contextPath}/tasks/delete/${task.id}" type="button" role="button" class="btn btn-default">
-  					<img src="${pageContext.request.contextPath}/resources/images/delete.png"/> <m:message message="task.delete.def.btn"/>
   				</a>
   			</c:if>
   		</div>
@@ -74,8 +81,8 @@
 		<c:otherwise>
 			<section class="col-md-8">
 				<div class="jumbotron">
-  					<h1>No tasks choosed...</h1>
-  					<h2><small>Try to choose any task from list to watch info.</small></h2>
+  					<h1><m:message message="no.tasks.chosen"/></h1>
+  					<h2><small><m:message message="choose.task.from.list"/></small></h2>
 				</div>
 			</section>
 		</c:otherwise>

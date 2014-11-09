@@ -50,6 +50,16 @@
     			<th><m:message message="task.page.status"/></th>
     			<td><label class="label label-warning">${task.status.name}</label></td>
     		</tr>
+    		<tr>
+    			<th><m:message message="task.page.progress"/></th>
+    			<td>
+    				<div class="progress">
+  						<div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="${task.progress}" aria-valuemin="0" aria-valuemax="100" style="width: ${task.progress}%;">
+    						${task.progress}%
+  						</div>
+					</div>
+    			</td>
+    		</tr>
     	</tbody>
     </table>
     </div>
@@ -73,7 +83,7 @@
  <div class="panel panel-info">
   <div class="panel-heading">
     <h3 class="panel-title">
-    	<label class="label label-primary">Comments</label>
+    	<label class="label label-primary"><m:message message="task.page.comments"/></label>
     </h3>
   </div>
   <div class="panel-body">

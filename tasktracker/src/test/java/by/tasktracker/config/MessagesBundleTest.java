@@ -10,9 +10,10 @@ public class MessagesBundleTest {
 
 	@Test
 	public void setLanguageTest() {
-		assertTrue(MessagesBundle.message("hello").equals("Hello"));
-		MessagesBundle.setLanguage(Lang.RU);
-		assertTrue(!MessagesBundle.message("hello").equals("Hello"));
+		MessagesBundle mb = new MessagesBundle();
+		assertTrue(mb.message("hello").equals("Hello"));
+		mb.setLanguage(Lang.RU);
+		assertTrue(!mb.message("hello").equals("Hello"));
 	}
 
 }

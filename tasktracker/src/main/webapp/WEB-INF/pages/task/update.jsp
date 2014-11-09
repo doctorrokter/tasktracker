@@ -64,6 +64,12 @@
     	</div>
   	</div>
   	<div class="form-group">
+    	<label for="progress" class="col-sm-2 control-label"><m:message message="task.page.progress"/></label>
+    	<div class="col-sm-4">
+    		<input class="form-control" id="progress" name="progress" value="${task.progress}">
+    	</div>
+  	</div>
+  	<div class="form-group">
     	<label for="description" class="col-sm-2 control-label"><m:message message="task.page.description"/></label>
     	<div class="col-sm-4">
     		<textarea class="form-control" id="description" name="description" required="required">${task.description}</textarea>
@@ -72,7 +78,7 @@
   	<div class="form-group">
     	<label for="comment" class="col-sm-2 control-label"><m:message message="task.page.comment"/></label>
     	<div class="col-sm-4">
-    		<textarea class="form-control" id="comment" name="comment"></textarea>
+    		<textarea class="form-control" id="comment" name="comment" required="required"></textarea>
     	</div>
   	</div>
   	<div class="form-group">

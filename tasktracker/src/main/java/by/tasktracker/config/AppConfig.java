@@ -28,6 +28,10 @@ public class AppConfig {
 		
 	}
 	
+	public static Properties getProperties() {
+		return props;
+	}
+	
 	public static String p(String name) {
 		return props.getProperty(name);
 	}

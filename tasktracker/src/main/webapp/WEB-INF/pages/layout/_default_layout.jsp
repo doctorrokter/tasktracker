@@ -24,12 +24,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Task Tracker</a>
+          <a class="navbar-brand" href="${pageContext.request.contextPath}/">Task Tracker</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
             <li class="dropdown">
           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><m:message message="def.nav.lang"/><span class="caret"></span></a>
           		<ul class="dropdown-menu" role="menu">
@@ -41,9 +39,6 @@
             	<a href="${pageContext.request.contextPath}/login/logout" class="navbar-link"><span class="label label-primary">${logged_user.firstName} ${logged_user.lastName}</span></a>
             </li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
         </div>
       </div>
     </div>
@@ -57,9 +52,9 @@
             <li class='<c:if test="${tasksView || taskCreate || taskInfo || taskUpdate}">active</c:if>'>
             	<a href="${pageContext.request.contextPath}/tasks"><m:message message="def.side.menu.all.tasks"/></a>
             </li>
-            <li>
+            <!-- <li>
             	<a href="#"><m:message message="def.side.menu.my.tasks"/></a>
-            </li>
+            </li> -->
           </ul>
           <ul class="nav nav-sidebar">
             <li class='<c:if test="${usersView || userInfo || userCreate || userUpdate}">active</c:if>'>

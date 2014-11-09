@@ -5,7 +5,7 @@
 <div class="panel panel-info">
   <div class="panel-heading">
     <h3 class="panel-title">
-    	<label class="label label-primary">User - ${user.firstName} ${user.lastName}</label>
+    	<label class="label label-primary"><m:message message="user.page.header"/> - ${user.firstName} ${user.lastName}</label>
     </h3>
   </div>
   <div class="panel-body">
@@ -13,23 +13,23 @@
     <table class="table table-hover">
     	<tbody>
     		<tr>
-    			<th><m:message message="user.page.login"/></th>
+    			<th><m:message message="user.attr.login"/></th>
     			<td>${user.login}</td>
     		</tr>
     		<tr>
-    			<th><m:message message="user.page.firstname"/></th>
+    			<th><m:message message="user.attr.firstname"/></th>
     			<td>${user.firstName}</td>
     		</tr>
     		<tr>
-    			<th><m:message message="user.page.lastname"/></th>
+    			<th><m:message message="user.attr.lastname"/></th>
     			<td>${user.lastName}</td>
     		</tr>
     		<tr>
-    			<th><m:message message="user.page.email"/></th>
+    			<th><m:message message="user.attr.email"/></th>
     			<td>${user.email}</td>
     		</tr>
     		<tr>
-    			<th><m:message message="user.page.phone"/></th>
+    			<th><m:message message="user.attr.phone"/></th>
     			<td>${user.phoneNumber}</td>
     		</tr>
     	</tbody>
@@ -39,11 +39,11 @@
     	<table class="table table-hover">
     		<tbody>
     			<tr>
-    				<th><m:message message="user.page.created"/></th>
+    				<th><m:message message="user.attr.created"/></th>
     				<td>${user.createdAt}</td>
     			</tr>
     			<tr>
-    				<th><m:message message="user.page.updated"/></th>
+    				<th><m:message message="user.attr.updated"/></th>
     				<td>${user.updatedAt}</td>
     			</tr>
     		</tbody>

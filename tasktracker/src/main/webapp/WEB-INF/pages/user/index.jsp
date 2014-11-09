@@ -8,15 +8,19 @@
 <div class="page-header">
 	<h3><m:message message="user.index.page.header"/>
 		<div class="pull-right">
-			<a href="${pageContext.request.contextPath}/users/create" role="button" class="btn btn-default">
-				<img src="${pageContext.request.contextPath}/resources/images/user.png"/> <m:message message="user.create.user.btn"/>
-			</a>
-			<a href="${pageContext.request.contextPath}/users/update/${user.id}" type="button" role="button" class="btn btn-default">
-  				<img src="${pageContext.request.contextPath}/resources/images/update.png"/> <m:message message="user.update.user.btn"/>
-  			</a>
-  			<a href="${pageContext.request.contextPath}/users/delete/${user.id}" role="button" class="btn btn-default">
-  				<img src="${pageContext.request.contextPath}/resources/images/delete.png"/> <m:message message="user.delete.user.btn"/>
-  			</a>
+			<c:forEach items="${logged_user.roles}" var="role">
+				<c:if test="${role.name eq 'admin'}">
+					<a href="${pageContext.request.contextPath}/users/create" role="button" class="btn btn-default">
+						<img src="${pageContext.request.contextPath}/resources/images/user.png"/> <m:message message="user.create.user.btn"/>
+					</a>
+					<a href="${pageContext.request.contextPath}/users/update/${user.id}" type="button" role="button" class="btn btn-default">
+  						<img src="${pageContext.request.contextPath}/resources/images/update.png"/> <m:message message="user.update.user.btn"/>
+  					</a>
+  					<a href="${pageContext.request.contextPath}/users/delete/${user.id}" role="button" class="btn btn-default">
+  						<img src="${pageContext.request.contextPath}/resources/images/delete.png"/> <m:message message="user.delete.user.btn"/>
+  					</a>
+  				</c:if>
+  			</c:forEach>
   		</div>
 	</h3>	
 </div>
@@ -54,8 +58,8 @@
 		<c:otherwise>
 			<section class="col-md-8">
 				<div class="jumbotron">
-  					<h1>No users choosed...</h1>
-  					<h2><small>Try to choose any user from list to watch info.</small></h2>
+  					<h1><m:message message="no.users.chosen"/></h1>
+  					<h2><small><m:message message="choose.user.from.list"/></small></h2>
 				</div>
 			</section>
 		</c:otherwise>

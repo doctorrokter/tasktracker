@@ -10,9 +10,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import by.tasktracker.config.MessagesBundle;
 import by.tasktracker.web.controllers.MainController;
 
 /**
@@ -29,6 +31,11 @@ public class TaskTrackerFilter implements Filter {
     	HttpServletRequest req = (HttpServletRequest) request;
     	HttpServletResponse resp = (HttpServletResponse) response;
     	req.setCharacterEncoding(encoding);
+    	HttpSession session = req.getSession(true);
+    	
+    	if (session.getAttribute("messages") == null) {
+    		session.setAttribute("messages", new MessagesBundle());
+    	}
     	    	
     	String url = req.getRequestURI().replaceFirst(req.getContextPath(), "");
     	logger.debug(url);
