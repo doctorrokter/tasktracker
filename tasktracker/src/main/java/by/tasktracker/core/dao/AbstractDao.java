@@ -18,13 +18,6 @@ import by.tasktracker.core.models.AbstractModel;
 import by.tasktracker.core.util.Reflector;
 import by.tasktracker.db.DBManager;
 
-/**
- * ����������� �����, � ������� ����������� ��� ������ �� ���������� ������ � ���� ������,
- * ��������� ���������� �����������, ���������� �������� ���� AbstractModel. ��� ������������ �����,
- * � ������� ���������� ��������� � ���� ������, �������� � �������� ������ ����� � �����������.
- * ��� �������� ����� ����� DAO ����� �������������� �� ����� ������ � ������������ protected ������ 
- * �� ����� ����������.
- */
 public class AbstractDao {
 
 	private static final Logger logger = Logger.getLogger(AbstractDao.class);
@@ -38,17 +31,11 @@ public class AbstractDao {
 		return connection;
 	}
 	
-	/**
-	 * ��������� ���������� ������ ���� AbstractModel � ���� ������, ��������� SQL-������ �����������,
-	 * ������ �� ��������� � ����� �������. ���������� id ��������� ������ � ���� ������.
-	 * @param model �������������� ������ ���� AbstractModel, ������� ������ � ���� ������.
-	 * @return
-	 */
 	protected int save(AbstractModel model) {
 		Table table = model.getClass().getAnnotation(Table.class);
 		String query = "INSERT INTO " + table.name();
-		String columns = " (";	// ������� � �������, ������� ����� ���������
-		String values = " VALUES(";	 // ��������������� �������� ��� ��������
+		String columns = " (";
+		String values = " VALUES(";
 		
 		Field [] modelFields = model.getClass().getDeclaredFields();
 		for (Field f : modelFields) {
@@ -66,10 +53,6 @@ public class AbstractDao {
 		return execute(query);
 	}
 	
-	/**
-	 * ������� �� ���� ������ ������, ��������������� ����������� �� ���� ������� ���� AbstractModel.
-	 * @param model �������������� ������ ���� AbstractModel, ������� ������� �� ���� ������.
-	 */
 	protected void delete(AbstractModel model) {
 		Table table = model.getClass().getAnnotation(Table.class);
 		Field id = Reflector.findField("id", model);
@@ -97,22 +80,12 @@ public class AbstractDao {
 		execute(query);
 	}
 	
-	/**
-	 * ������� ��� ������ �� �������.
-	 * @param clazz ������ ���� Class, ��������������� ������� � ���� ������.
-	 */
 	protected void deleteAll(Class<? extends AbstractModel> clazz) {
 		Table table = clazz.getAnnotation(Table.class);
 		String query = "DELETE FROM " + table.name();
 		execute(query);
 	}
 	
-	/**
-	 * ������� ������ � ������� �� ��������� ����������� �� ���� ������ � ����������.
-	 * @param clazz ������ ���� Class, ��������� �������� ����� �������� ����� ���������� �������.
-	 * @param subQuery ������ ����������.
-	 * @return
-	 */
 	protected AbstractModel find(Class<? extends AbstractModel> clazz, String subQuery, Object... params) {
 		subQuery = convertQuery(subQuery, params);
 		String query = "SELECT * FROM " + prepareQuery(clazz);
@@ -120,22 +93,11 @@ public class AbstractDao {
 		return executeQuery(query, clazz);
 	}
 	
-	/**
-	 * ������� ��� ������ � �������, �������� ������������� �� ���� ������.
-	 * @param clazz ������ ���� Class, ��������� ����������� �������� ����� �������� ����� ���������� �������.
-	 * @return
-	 */
 	protected List<? extends AbstractModel> findAll(Class<? extends AbstractModel> clazz) {
 		String query = "SELECT * FROM " + prepareQuery(clazz);
 		return fetch(clazz, query);
 	}
 	
-	/**
-	 * ������� ��� ������ � �������, �������� ������������� �� ���� ������ � ���������� � �����������.
-	 * @param clazz ������ ���� Class, ��������� ����������� �������� ����� �������� ����� ���������� �������.
-	 * @param subQuery ������ ����������.
-	 * @return
-	 */
 	protected List<? extends AbstractModel> findAll(Class<? extends AbstractModel> clazz, String subQuery, Object... params) {
 		if (params != null || params.length != 0) {
 			subQuery = convertQuery(subQuery, params);
@@ -145,11 +107,6 @@ public class AbstractDao {
 		return fetch(clazz, query);
 	}
 	
-	/**
-	 * ����� ��������� ���������� �� ���� SQL-������ (���� insert, delete, update) � ���������� id ��������� ������ � ���� ������.
-	 * @param query �������������� SQL-������.
-	 * @return
-	 */
 	protected int execute(String query) {
 		int id = 0;
 		Statement statement = null;
@@ -168,12 +125,6 @@ public class AbstractDao {
 		return id;
 	}
 	
-	/**
-	 * ����� ��������� ���������� �� ���� SQL-������ (���� select) � ���������� ������� ������ ���� AbstractModel.
-	 * @param query �������������� SQL-������.
-	 * @param clazz ������ ���� Class, ��������� �������� ����� �������� ����� ���������� �������.
-	 * @return
-	 */
 	protected AbstractModel executeQuery(String query, Class<? extends AbstractModel> clazz) {
 		Statement statement = null;
 		ResultSet resultSet = null;

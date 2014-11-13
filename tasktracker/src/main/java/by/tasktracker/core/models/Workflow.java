@@ -10,9 +10,6 @@ import by.tasktracker.core.annotations.Table;
 @Table(name = "workflows")
 public class Workflow extends AbstractModel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5893176726966363895L;
 
 	@Column(name = "id")

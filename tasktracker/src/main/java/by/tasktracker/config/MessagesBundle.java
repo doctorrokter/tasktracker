@@ -6,6 +6,10 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Класс для загрузки файлов с локализованными сообщениями. Сейчас доступны два языка:
+ * русский, английский. Английский язык загружается по-умолчанию.
+ */
 public class MessagesBundle {
 
 	private static final Logger logger = Logger.getLogger(MessagesBundle.class);

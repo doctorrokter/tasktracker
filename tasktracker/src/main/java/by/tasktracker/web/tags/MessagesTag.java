@@ -9,11 +9,12 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import by.tasktracker.config.MessagesBundle;
 
+/**
+ * Кастомный тэг, использующийся в jsp-страницах для вставки сообщений
+ * с языковой поддержкой.
+ */
 public class MessagesTag extends TagSupport {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1911603264081998198L;
 	private String message;
 		

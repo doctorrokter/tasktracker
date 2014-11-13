@@ -11,10 +11,7 @@ import by.tasktracker.core.sql.Sql;
 
 @Table(name = "tasks")
 public class Task extends AbstractModel implements Serializable {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -7967787996928931546L;
 
 	@Column(name = "id")

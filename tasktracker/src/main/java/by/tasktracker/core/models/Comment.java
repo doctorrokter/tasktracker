@@ -10,10 +10,7 @@ import by.tasktracker.core.sql.Sql;
 
 @Table(name = "comments")
 public class Comment extends AbstractModel implements Serializable {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 8045592706478930375L;
 
 	@Column(name = "id")

@@ -12,9 +12,6 @@ import by.tasktracker.core.sql.Sql;
 @Table(name = "categories")
 public class Category extends AbstractModel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3816110472352770481L;
 
 	@Column(name = "id") 

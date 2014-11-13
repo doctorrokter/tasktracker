@@ -14,9 +14,6 @@ public class CommentsDaoTest {
 		commentsDao = CommentsDao.getCommentsDao();
 	}
 	
-	/**
-	 * �������� �� ������� ������ �����������.
-	 */
 	@Test
 	public void getCommentUserTest() {
 		Comment c = new Comment();

@@ -6,6 +6,9 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Класс для загрузки конфигурации приложения.
+ */
 public class AppConfig {
 
 	private static final Logger logger = Logger.getLogger(AppConfig.class);

@@ -13,6 +13,9 @@ import org.apache.log4j.Logger;
 
 import by.tasktracker.config.AppConfig;
 
+/**
+ * Класс для отправки email-сообщений.
+ */
 public class Mailer extends Thread{
 
 	private static final Logger logger = Logger.getLogger(Mailer.class);

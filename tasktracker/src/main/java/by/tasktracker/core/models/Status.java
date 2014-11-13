@@ -9,9 +9,6 @@ import by.tasktracker.core.annotations.Table;
 @Table(name = "statuses")
 public class Status extends AbstractModel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2290690982798064760L;
 
 	@Column(name = "id")

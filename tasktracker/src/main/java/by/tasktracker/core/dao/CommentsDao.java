@@ -8,6 +8,9 @@ import org.apache.log4j.Logger;
 import by.tasktracker.core.models.Comment;
 import by.tasktracker.core.models.User;
 
+/**
+ * Класс для работы с комментариями.
+ */
 public class CommentsDao extends AbstractDao {
 
 	private static final Logger logger = Logger.getLogger(TasksDao.class);
@@ -23,15 +26,21 @@ public class CommentsDao extends AbstractDao {
 		}
 		return commentsDao;
 	}
+	
 	/**
-	 * ���������� ������ (������������) �����������.
-	 * @param comment ������ ���� Comment.
-	 * @return ������ ���� User, ����� ����������.
+	 * Получение пользователя, оставившего комментарий.
+	 * @param comment объект Comment.
+	 * @return объект User.
 	 */
 	public User getUserByComment(Comment comment) {
 		return (User) find(User.class, "WHERE id = ?", comment.getUserId());
 	}
 	
+	/**
+	 * Создание комментария.
+	 * @param comment объект Comment.
+	 * @return созданный id комментария.
+	 */
 	public int createComment(Comment comment) {
 		comment.setCreatedAt(new Timestamp(new Date().getTime()));
 		comment.setUpdatedAt(new Timestamp(new Date().getTime()));
@@ -39,6 +48,10 @@ public class CommentsDao extends AbstractDao {
 		return save(comment);
 	}
 	
+	/**
+	 * Удаление комментария.
+	 * @param comment объект Comment.
+	 */
 	public void deleteComment(Comment comment) {
 		logger.debug("Deleting comment " + comment);
 		delete(comment);

@@ -16,24 +16,11 @@ public class Reflector {
 		
 	}
 	
-	/**
-	 * ����� �������� �� ���� ������ � ���������� ��� �� ������, �� � ��������� ������ ������.
-	 * ��� ����� ����� � ���������� ��� ��������� ����� �������/������� ������ �� �������� ���� (������� ��������).
-	 * @param str ��� ���� ������
-	 * @return
-	 */
 	public static String firstUpperCase(String str) {
 		if(str == null || str.isEmpty()) return "";
 		return str.substring(0, 1).toUpperCase() + str.substring(1);
 	}
 	
-	/**
-	 * ����� ���������� ������ Field (���� ������) �� ��������.
-	 * ���� �� �������, ���������� null.
-	 * @param fieldName ��� ���� ������
-	 * @param obj ������, � �������� ����� ������ � �������� ������ Field
-	 * @return
-	 */
 	public static Field findField(String fieldName, Object obj) {
 		Field [] fields = getAllFields(obj);
 		for (Field f : fields) {
@@ -48,12 +35,6 @@ public class Reflector {
 		return obj.getClass().getDeclaredFields();
 	}
 	
-	/**
-	 * ����� ������� ������ ��� ���������������� ���� �������.		   
-	 * @param field ������ ���� Field, �� ��������� �������� ����� ������ ������
-	 * @param obj ������, � �������� ����� ������ ������
-	 * @return
-	 */
 	public static Method findGetter(Field field, Object obj) {
 		Class<?>[] params = null;
 		Method method = null;
@@ -65,12 +46,6 @@ public class Reflector {
 		return method;
 	}
 	
-	/**
-	 * ����� ������� ������ ��� ���������������� ���� �������.
-	 * @param field ������ ���� Field, �� ��������� �������� ����� ������ ������
-	 * @param obj obj ������, � �������� ����� ������ ������
-	 * @return
-	 */
 	public static Method findSetter(Field field, Object obj) {
 		Class<?>[] params = {field.getType()};
 		Method method = null;
@@ -82,12 +57,6 @@ public class Reflector {
 		return method;
 	}
 	
-	/**
-	 * ����� ������� �������.
-	 * @param method ������ ���� Method (���������� �������), ������� ����� ��������
-	 * @param target ������, � �������� ����� �������� ������� �����
-	 * @return
-	 */
 	public static Object invokeGetter(Method method, Object target) {
 		Object[] methodParams = null;
 		Object result = null;
@@ -99,12 +68,6 @@ public class Reflector {
 		return result;
 	}
 	
-	/**
-	 * ����� ������� �������.
-	 * @param method ������ ���� Method (���������� �������), ������� ����� ��������
-	 * @param target ������, � �������� ����� �������� ������� �����
-	 * @param value ��������, ������� ����� ���������� ����������� ������
-	 */
 	public static void invokeSetter(Method method, Object target, Object value) {
 		try {
 			method.invoke(target, value);
@@ -113,11 +76,6 @@ public class Reflector {
 		}
 	}
 	
-	/**
-	 * ���������� ������ ������. ��� ����������� �������� ������� � ������� ��������� ����� "new" (Object o = new Object())
-	 * @param clazz ������ ���� Class, ������� �������� ����� ��������.
-	 * @return
-	 */
 	public static Object createObjectByClass(Class<?> clazz) {
 		Class<?>[] classParams = null;
 		Object [] instanceParams = null;

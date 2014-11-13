@@ -24,10 +24,7 @@ public class TasksDaoTest extends AbstractDao {
 	public void tearDown() throws Exception {
 		deleteAll(Task.class);
 	}
-
-	/**
-	 * �������� �� ������� ������ ������ �� �� id.
-	 */
+	
 	@Test
 	public void findTaskByIdTest() {
 		Task task = DaoHelper.createTask();
@@ -37,9 +34,6 @@ public class TasksDaoTest extends AbstractDao {
 		assertTrue(task.getTitle().equals(newTask.getTitle()));
 	}
 	
-	/**
-	 * �������� �� ������� ������� ������ �� id �������.
-	 */
 	@Test
 	public void getTaskStatusByStatusIdTest() {
 		Task task = DaoHelper.createTask();
@@ -50,9 +44,6 @@ public class TasksDaoTest extends AbstractDao {
 		assertTrue(task.getStatus().getName().equals("New"));
 	}
 	
-	/**
-	 * �������� �� ������� ��������� ������ �� id ���������.
-	 */
 	@Test
 	public void getTaskCategoryByCategoryIdTest() {
 		Task task = DaoHelper.createTask();
@@ -63,9 +54,6 @@ public class TasksDaoTest extends AbstractDao {
 		assertTrue(task.getCategory().getName().equals("Project"));
 	}
 	
-	/**
-	 * �������� �� ������� ������, ������� �������� ������������ ������� ��� ������� ������.
-	 */
 	@Test
 	public void getParentTaskTest() {
 		Task parent = DaoHelper.createTask();
@@ -81,9 +69,6 @@ public class TasksDaoTest extends AbstractDao {
 		assertTrue(child.getParent().getTitle().equals("Parent"));
 	}
 	
-	/**
-	 * �������� �� ������� ������������, ������� �������� ������� ������.
-	 */
 	@Test
 	public void getTaskCreatorTest() {
 		Task task = DaoHelper.createTask();
@@ -94,9 +79,6 @@ public class TasksDaoTest extends AbstractDao {
 		assertTrue(task.getCreator().getLogin().equals("test"));
 	}
 	
-	/**
-	 * �������� �� ������� ������������, ������� �������� ������������� �� ������.
-	 */
 	@Test
 	public void getTaskAssigneeTest() {
 		Task task = DaoHelper.createTask();
@@ -107,9 +89,6 @@ public class TasksDaoTest extends AbstractDao {
 		assertTrue(task.getAssignee().getLogin().equals("test"));
 	}
 	
-	/**
-	 * �������� �� ������� ���� ������������, ����������� � ������� ������.
-	 */
 	@Test
 	public void getTaskCommentsTest() {
 		Task task1 = DaoHelper.createTask();

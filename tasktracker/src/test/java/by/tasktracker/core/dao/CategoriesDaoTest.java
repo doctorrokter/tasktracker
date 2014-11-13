@@ -14,7 +14,7 @@ public class CategoriesDaoTest extends AbstractDao{
 	private CategoriesDao categoriesDao;
 	
 	public CategoriesDaoTest() {
-		categoriesDao = categoriesDao.getCategoriesDao();
+		categoriesDao = CategoriesDao.getCategoriesDao();
 	}
 	
 	@After
@@ -22,9 +22,6 @@ public class CategoriesDaoTest extends AbstractDao{
 		deleteAll(Task.class);
 	}
 	
-	/**
-	 * �������� �� ������� ������� ������� ��������� �� ��� id.
-	 */
 	@Test
 	public void findCategoryByIdTest() {
 		Category c = categoriesDao.findCategoryById(1);
@@ -32,17 +29,11 @@ public class CategoriesDaoTest extends AbstractDao{
 		assertTrue(c.getName().equals("Project"));
 	}
 	
-	/**
-	 * �������� �� ������� ���� ��������� ���������.
-	 */
 	@Test
 	public void getAllCategoriesTest() {
 		assertTrue(categoriesDao.getAllCategories().size() > 0);
 	}
 	
-	/**
-	 * �������� �� ������� ���� �����, ����������� � ������������ ���������.
-	 */
 	@Test
 	public void getTasksByCategoryTest() {
 		Task t1 = DaoHelper.createTask();
