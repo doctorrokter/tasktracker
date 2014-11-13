@@ -9,6 +9,9 @@ import by.tasktracker.core.dao.UsersDao;
 import by.tasktracker.core.models.Role;
 import by.tasktracker.core.models.User;
 
+/**
+ * Контроллер для работы с пользователями. 
+ */
 public class UsersController extends MainController {
 
 	private UsersDao usersDao;
@@ -19,12 +22,18 @@ public class UsersController extends MainController {
 		rolesDao = RolesDao.getRolesDao();
 	}
 	
+	/**
+	 * Метод для получения начальной страницы со списком всех пользователей.
+	 */
 	public void index() {
 		param("usersView", true);
 		param("usersTree", getUsersTree());
 		forward("layout/" + getDefaultLayout());
 	}
 	
+	/**
+	 * Метод для получения информации по запрошенному пользователю (по id).
+	 */
 	public void info() {
 		User user = usersDao.findUserById(getId());
 		param("userInfo", true);
@@ -34,6 +43,9 @@ public class UsersController extends MainController {
 		forward("layout/" + getDefaultLayout());
 	}
 	
+	/**
+	 * Метод для получения страницы с формой для создания пользователя.
+	 */
 	public void create() {
 		param("userCreate", true);
 		param("rolesList", rolesDao.getAllRoles());
@@ -41,6 +53,9 @@ public class UsersController extends MainController {
 		forward("layout/" + getDefaultLayout());
 	}
 	
+	/**
+	 * Метод, обрабатывающий форму, пришедшей на сервер, для создания пользователя.
+	 */
 	public void doCreate() {
 		User user = new User();
 		user.setLogin(param("login"));
@@ -61,6 +76,9 @@ public class UsersController extends MainController {
 		redirect("/users/info/" + user.getId());
 	}
 	
+	/**
+	 * Метод для получения страницы с формой для редактирования пользователя.
+	 */
 	public void update() {
 		User user = usersDao.findUserById(getId());
 		user.setRoles(rolesDao.getUserRoles(user));
@@ -70,6 +88,9 @@ public class UsersController extends MainController {
 		forward("layout/" + getDefaultLayout());
 	}
 	
+	/**
+	 * Метод, обрабатывающий форму, пришедшей на сервер, для редактирования пользователя.
+	 */
 	public void doUpdate() {
 		User user = usersDao.findUserById(Integer.parseInt(param("id")));
 		user.setLogin(param("login"));
@@ -89,6 +110,9 @@ public class UsersController extends MainController {
 		redirect("/users/info/" + user.getId());
 	}
 	
+	/**
+	 * Метод для удаления пользователя (по id).
+	 */
 	public void delete() {
 		User user = new User();
 		user.setId(getId());

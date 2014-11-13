@@ -22,6 +22,9 @@ import by.tasktracker.core.models.User;
 import by.tasktracker.core.models.Workflow;
 import by.tasktracker.core.util.Mailer;
 
+/**
+ * Контроллер для работы с задачами.
+ */
 public class TasksController extends MainController {
 	
 	private TasksDao tasksDao;
@@ -38,11 +41,18 @@ public class TasksController extends MainController {
 		workflowsDao = WorkflowsDao.getWorkflowsDao();
 	}
 
+	/**
+	 * Метод для получения начальной страницы со списком всех задач.
+	 */
 	public void index() {
 		param("tasksView", true);
 		param("tasksTree", getTasksTree(tasksDao.getAllTasks()));
 		forward("layout/" + getDefaultLayout());
 	}
+	
+	/**
+	 * Метод для получения информации по запрошенной пользователем задаче (по id).
+	 */
 	public void info() {
 		Task task = tasksDao.findTaskById(getId());
 		task.setComments(tasksDao.getTaskComments(task));
@@ -53,6 +63,9 @@ public class TasksController extends MainController {
 		forward("layout/" + getDefaultLayout());
 	}
 	
+	/**
+	 * Метод для получения страницы с формой создания задачи.
+	 */
 	public void create() {
 		Category category = categoriesDao.findCategoryById(Integer.parseInt(param("categoryId")));
 		category.getWorkflow().setStatuses(workflowsDao.getStatuses(category.getWorkflow()));
@@ -83,6 +96,9 @@ public class TasksController extends MainController {
 		}
 	}
 	
+	/**
+	 * Метод, обрабатывающий форму, пришедшей на сервер, для создания задачи.
+	 */
 	public void doCreate() {
 		Task task = new Task();
 		User user = (User) session("logged_user");
@@ -103,6 +119,9 @@ public class TasksController extends MainController {
 		redirect("/tasks/info/" + task.getId());
 	}
 	
+	/**
+	 * Метод для получения страницы с формой редактирования существующей задачи.
+	 */
 	public void update() {
 		Task task = tasksDao.findTaskById(getId());
 		Workflow w = categoriesDao.getWorkflow(task.getCategory());
@@ -114,6 +133,9 @@ public class TasksController extends MainController {
 		forward("layout/" + getDefaultLayout());
 	}
 	
+	/**
+	 * Метод, обрабатывающий форму, пришедшей на сервер, для редактирования задачи.
+	 */
 	public void doUpdate() {
 		User user = (User) session("logged_user");
 		Task task = tasksDao.findTaskById(Integer.parseInt(param("id")));
@@ -137,6 +159,9 @@ public class TasksController extends MainController {
 		redirect("/tasks/info/" + task.getId());
 	}
 	
+	/**
+	 * Метод для удаления задачи (по id).
+	 */
 	public void delete() {
 		Task task = new Task();
 		task.setId(getId());

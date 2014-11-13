@@ -18,7 +18,7 @@ import by.tasktracker.config.MessagesBundle;
 import by.tasktracker.web.controllers.MainController;
 
 /**
- * Servlet Filter implementation class TaskTrackerFilter
+ * Основной фильтр, который принимает и обрабатывает все приходящие запросы.
  */
 public class TaskTrackerFilter implements Filter {
 
