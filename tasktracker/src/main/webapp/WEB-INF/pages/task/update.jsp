@@ -15,7 +15,7 @@
 </script>
 
 <div class="page-header">
-	<h3>Update <label class="label label-primary">${task.category.name} #${task.id} - ${task.title}</label></h3>
+	<h3><m:message message="task.update"/> <label class="label label-primary">${task.category.name} #${task.id} - ${task.title}</label></h3>
 </div>
 
 <form role="form" class="form-horizontal" action="${pageContext.request.contextPath}/tasks/doUpdate" method="POST" accept-charset="utf-8">

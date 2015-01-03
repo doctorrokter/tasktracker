@@ -86,7 +86,7 @@ public class UsersDao extends AbstractDao {
 	 * @param user объект User.
 	 */
 	public void removeRoles(User user) {
-		execute("DELETE FROM users_roles WHERE user_id = " + user.getId() + ")");
+		execute("DELETE FROM users_roles WHERE user_id = " + user.getId());
 	}
 	
 	/**
