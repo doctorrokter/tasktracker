@@ -76,7 +76,7 @@ public class TasksDaoTest extends AbstractDao {
 		
 		task = tasksDao.findTaskById(task.getId());
 		assertTrue(task.getCreator() != null);
-		assertTrue(task.getCreator().getLogin().equals("test"));
+		assertTrue(task.getCreator().getLogin().equals("root"));
 	}
 	
 	@Test
@@ -86,7 +86,7 @@ public class TasksDaoTest extends AbstractDao {
 		
 		task = tasksDao.findTaskById(task.getId());
 		assertTrue(task.getAssignee() != null);
-		assertTrue(task.getAssignee().getLogin().equals("test"));
+		assertTrue(task.getAssignee().getLogin().equals("root"));
 	}
 	
 	@Test

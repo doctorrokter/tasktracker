@@ -18,6 +18,9 @@ public class Role extends AbstractModel implements Serializable {
 	@Column(name = "name")
 	private String name;
 	
+	@Column(name = "permissions")
+	private String permissions;
+	
 	@Column(name = "created_at")
 	private Timestamp createdAt;
 	
@@ -48,6 +51,14 @@ public class Role extends AbstractModel implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(String permissions) {
+		this.permissions = permissions;
 	}
 
 	public Timestamp getCreatedAt() {
@@ -83,8 +94,9 @@ public class Role extends AbstractModel implements Serializable {
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
+				+ ((permissions == null) ? 0 : permissions.hashCode());
+		result = prime * result
 				+ ((updatedAt == null) ? 0 : updatedAt.hashCode());
-		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		return result;
 	}
 
@@ -109,15 +121,15 @@ public class Role extends AbstractModel implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (permissions == null) {
+			if (other.permissions != null)
+				return false;
+		} else if (!permissions.equals(other.permissions))
+			return false;
 		if (updatedAt == null) {
 			if (other.updatedAt != null)
 				return false;
 		} else if (!updatedAt.equals(other.updatedAt))
-			return false;
-		if (users == null) {
-			if (other.users != null)
-				return false;
-		} else if (!users.equals(other.users))
 			return false;
 		return true;
 	}

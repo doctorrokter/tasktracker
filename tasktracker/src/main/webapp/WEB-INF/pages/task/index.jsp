@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="m" uri="/WEB-INF/tlds/message.tld"%>
+<%@ taglib prefix="p" uri="/WEB-INF/tlds/permission.tld"%>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap-combined.min.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-tree.js"></script>
@@ -8,39 +9,33 @@
 <div class="page-header">
 	<h3><m:message message="task.index.header"/>
 		<div class="pull-right">
-			
-  				<c:forEach items="${logged_user.roles}" var="role">
-  					<c:if test="${role.name eq 'admin' || role.name eq 'project manager'}">
-  						<a href="${pageContext.request.contextPath}/tasks/create?categoryId=1" type="button" role="button" class="btn btn-default">
-							<img src="${pageContext.request.contextPath}/resources/images/project.png"/> <m:message message="task.create.project.btn"/>
-						</a>
-						<c:if test="${taskInfo}">
-  							<a href="${pageContext.request.contextPath}/tasks/create?categoryId=2&parentId=${task.id}" type="button" role="button" class="btn btn-default">
-  								<img src="${pageContext.request.contextPath}/resources/images/task.png"/> <m:message message="task.create.task.btn"/>
-  							</a>
-  						</c:if>
-  					</c:if>
-  					<c:if test="${role.name eq 'admin' || role.name eq 'tester'}">
-  						<c:if test="${taskInfo}">
-  							<a href="${pageContext.request.contextPath}/tasks/create?categoryId=3&parentId=${task.id}" type="button" role="button" class="btn btn-default">
-  								<img src="${pageContext.request.contextPath}/resources/images/bug.png"/> <m:message message="task.create.bug.btn"/>
-  							</a>
-  						</c:if>
-  					</c:if>
-  					<c:if test="${role.name eq 'admin'}">
-  						<c:if test="${taskInfo}">
-  							<a href="${pageContext.request.contextPath}/tasks/delete/${task.id}" type="button" role="button" class="btn btn-default">
-  								<img src="${pageContext.request.contextPath}/resources/images/delete.png"/> <m:message message="task.delete.def.btn"/>
-  							</a>
-  						</c:if>
-  					</c:if>
-  				</c:forEach>
-  				<c:if test="${taskInfo}">
+			<p:permission rule="create_project">
+				<a href="${pageContext.request.contextPath}/tasks/create?categoryId=1" type="button" role="button" class="btn btn-default">
+					<img src="${pageContext.request.contextPath}/resources/images/project.png"/> <m:message message="task.create.project.btn"/>
+				</a>
+			</p:permission>
+			<c:if test="${taskInfo}">
+				<p:permission rule="create_task">
+					<a href="${pageContext.request.contextPath}/tasks/create?categoryId=2&parentId=${task.id}" type="button" role="button" class="btn btn-default">
+  						<img src="${pageContext.request.contextPath}/resources/images/task.png"/> <m:message message="task.create.task.btn"/>
+  					</a>
+				</p:permission>
+  				<p:permission rule="create_bug">
+  					<a href="${pageContext.request.contextPath}/tasks/create?categoryId=3&parentId=${task.id}" type="button" role="button" class="btn btn-default">
+  						<img src="${pageContext.request.contextPath}/resources/images/bug.png"/> <m:message message="task.create.bug.btn"/>
+  					</a>
+  				</p:permission>
+  				<p:permission rule="delete_task">
+  					<a href="${pageContext.request.contextPath}/tasks/delete/${task.id}" type="button" role="button" class="btn btn-default">
+  						<img src="${pageContext.request.contextPath}/resources/images/delete.png"/> <m:message message="task.delete.def.btn"/>
+  					</a>
+  				</p:permission>
+  				<p:permission rule="update_task">
   					<a href="${pageContext.request.contextPath}/tasks/update/${task.id}" type="button" role="button" class="btn btn-default">
   						<img src="${pageContext.request.contextPath}/resources/images/update.png"/> <m:message message="task.update.def.btn"/>
   					</a>
-  				</c:if>
-  			
+  				</p:permission>
+  			</c:if>  			
   		</div>
 	</h3>	
 </div>

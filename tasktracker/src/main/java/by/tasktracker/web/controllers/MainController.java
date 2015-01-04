@@ -19,6 +19,7 @@ import by.tasktracker.core.util.Reflector;
  */
 public class MainController {
 	
+	public final String pagesLocation = "/WEB-INF/pages/";
 	private static final Logger logger = Logger.getLogger(MainController.class);
 	private static HttpServletRequest request;
 	private static HttpServletResponse response;
@@ -88,7 +89,7 @@ public class MainController {
 	 */
 	protected void forward(String forwardTo) {
 		try {
-			request.getRequestDispatcher("/WEB-INF/pages/" + forwardTo).forward(request, response);
+			request.getRequestDispatcher(forwardTo).forward(request, response);
 		} catch (ServletException e) {
 			logger.error(e.getMessage());
 		} catch (IOException e) {

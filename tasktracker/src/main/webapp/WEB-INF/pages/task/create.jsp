@@ -15,7 +15,7 @@
 </script>
 
 <div class="page-header">
-	<h3>Create ${category.name}</h3>
+	<h3><m:message message="task.create"/> ${category.name}</h3>
 </div>
 
 <form role="form" class="form-horizontal" action="${pageContext.request.contextPath}/tasks/doCreate" method="POST" accept-charset="utf-8">

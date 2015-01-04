@@ -17,9 +17,9 @@ public class CommentsDaoTest {
 	@Test
 	public void getCommentUserTest() {
 		Comment c = new Comment();
-		c.setUserId(2);
+		c.setUserId(1);
 		c.setUser(commentsDao.getUserByComment(c));
-		assertTrue(c.getUser().getLogin().equals("test"));
+		assertTrue(c.getUser().getLogin().equals("root"));
 	}
 
 }

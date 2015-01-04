@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="m" uri="/WEB-INF/tlds/message.tld"%>
+<%@ taglib prefix="p" uri="/WEB-INF/tlds/permission.tld"%>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap-combined.min.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-tree.js"></script>
@@ -8,21 +9,23 @@
 <div class="page-header">
 	<h3><m:message message="user.index.page.header"/>
 		<div class="pull-right">
-			<c:forEach items="${logged_user.roles}" var="role">
-				<c:if test="${role.name eq 'admin'}">
-					<a href="${pageContext.request.contextPath}/users/create" role="button" class="btn btn-default">
-						<img src="${pageContext.request.contextPath}/resources/images/user.png"/> <m:message message="user.create.user.btn"/>
-					</a>
-					<c:if test="${userInfo}">
-						<a href="${pageContext.request.contextPath}/users/update/${user.id}" type="button" role="button" class="btn btn-default">
-  							<img src="${pageContext.request.contextPath}/resources/images/update.png"/> <m:message message="user.update.user.btn"/>
-  						</a>
-  						<a href="${pageContext.request.contextPath}/users/delete/${user.id}" role="button" class="btn btn-default">
-  							<img src="${pageContext.request.contextPath}/resources/images/delete.png"/> <m:message message="user.delete.user.btn"/>
-  						</a>
-  					</c:if>
-  				</c:if>
-  			</c:forEach>
+			<p:permission rule="create_user">
+				<a href="${pageContext.request.contextPath}/users/create" role="button" class="btn btn-default">
+					<img src="${pageContext.request.contextPath}/resources/images/user.png"/> <m:message message="user.create.user.btn"/>
+				</a>
+			</p:permission>
+			<c:if test="${userInfo}">
+				<p:permission rule="update_user">
+					<a href="${pageContext.request.contextPath}/users/update/${user.id}" type="button" role="button" class="btn btn-default">
+  						<img src="${pageContext.request.contextPath}/resources/images/update.png"/> <m:message message="user.update.user.btn"/>
+  					</a>
+				</p:permission>
+				<p:permission rule="delete_user">
+					<a href="${pageContext.request.contextPath}/users/delete/${user.id}" role="button" class="btn btn-default">
+  						<img src="${pageContext.request.contextPath}/resources/images/delete.png"/> <m:message message="user.delete.user.btn"/>
+  					</a>
+				</p:permission>
+			</c:if>
   		</div>
 	</h3>	
 </div>

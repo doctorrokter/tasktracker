@@ -47,7 +47,7 @@ public class TasksController extends MainController {
 	public void index() {
 		param("tasksView", true);
 		param("tasksTree", getTasksTree(tasksDao.getAllTasks()));
-		forward("layout/" + getDefaultLayout());
+		forward(pagesLocation + "layout/" + getDefaultLayout());
 	}
 	
 	/**
@@ -60,7 +60,7 @@ public class TasksController extends MainController {
 		param("taskInfo", true);
 		param("task", task);
 		param("tasksTree", getTasksTree(tasksDao.getAllTasks()));
-		forward("layout/" + getDefaultLayout());
+		forward(pagesLocation + "layout/" + getDefaultLayout());
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class TasksController extends MainController {
 			param("taskCreate", true);
 			param("task", parent);
 			param("usersList", usersDao.getAllUsers());
-			forward("layout/" + getDefaultLayout());
+			forward(pagesLocation + "layout/" + getDefaultLayout());
 		} else if (category.getId() == 2 || category.getId() == 3) {
 			Task parent = tasksDao.findTaskById(Integer.parseInt(param("parentId")));
 			if (parent.getCategory().getId() != 1) {
@@ -85,13 +85,13 @@ public class TasksController extends MainController {
 				param("tasksTree", getTasksTree(tasksDao.getAllTasks()));
 				param("task", parent);
 				param("error", ((MessagesBundle) session("messages")).message("error.create.task.wrong.parent"));
-				forward("layout/" + getDefaultLayout());
+				forward(pagesLocation + "layout/" + getDefaultLayout());
 			} else {
 				param("task", parent);
 				param("category", category);
 				param("taskCreate", true);
 				param("usersList", usersDao.getAllUsers());
-				forward("layout/" + getDefaultLayout());
+				forward(pagesLocation + "layout/" + getDefaultLayout());
 			}
 		}
 	}
@@ -130,7 +130,7 @@ public class TasksController extends MainController {
 		param("taskUpdate", true);
 		param("task", task);
 		param("usersList", usersDao.getAllUsers());
-		forward("layout/" + getDefaultLayout());
+		forward(pagesLocation + "layout/" + getDefaultLayout());
 	}
 	
 	/**
@@ -168,7 +168,7 @@ public class TasksController extends MainController {
 		tasksDao.deleteTask(task);
 		param("tasksTree", getTasksTree(tasksDao.getAllTasks()));
 		param("tasksView", true);
-		forward("layout/" + getDefaultLayout());
+		forward(pagesLocation + "layout/" + getDefaultLayout());
 	}
 	
 	private Map<Task, List<Task>> getTasksTree(List<Task> tasks) {

@@ -28,7 +28,7 @@ public class UsersController extends MainController {
 	public void index() {
 		param("usersView", true);
 		param("usersTree", getUsersTree());
-		forward("layout/" + getDefaultLayout());
+		forward(pagesLocation + "layout/" + getDefaultLayout());
 	}
 	
 	/**
@@ -40,7 +40,7 @@ public class UsersController extends MainController {
 		param("user", user);
 		param("usersTree", getUsersTree());
 		param("usersView", true);
-		forward("layout/" + getDefaultLayout());
+		forward(pagesLocation + "layout/" + getDefaultLayout());
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class UsersController extends MainController {
 		param("userCreate", true);
 		param("rolesList", rolesDao.getAllRoles());
 		param("usersList", usersDao.getAllUsers());
-		forward("layout/" + getDefaultLayout());
+		forward(pagesLocation + "layout/" + getDefaultLayout());
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class UsersController extends MainController {
 		param("userUpdate", true);
 		param("rolesList", rolesDao.getAllRoles());
 		param("user", user);
-		forward("layout/" + getDefaultLayout());
+		forward(pagesLocation + "layout/" + getDefaultLayout());
 	}
 	
 	/**
